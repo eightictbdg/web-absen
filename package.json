@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Web Absen untuk wahana 8ICT",
   "main": "server.js",
-  // "scripts": {
-  //   "test": "echo \"Error: no test specified\" && exit 1"
-  // },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "author": "8ICT",
   "license": "ISC",
   "dependencies": {
