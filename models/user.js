@@ -7,27 +7,18 @@ module.exports = (sequelize, type) => {
     },
     username: {
       type: type.STRING,
-      validate: {
-        notNull: true
-      }
+      allowNull: false
     },
     password: {
       type: type.STRING,
-      validate: {
-        notNull: true
-      }
+      allowNull: false
     },
-    nama: {
+    name: {
       type: type.STRING,
-      validate: {
-        notNull: true
-      }
+      allowNull: false
     },
-    kelas: {
-      type: type.STRING,
-      validate: {
-        notNull: true
-      }
+    class: {
+      type: type.STRING
     }
   })
 }

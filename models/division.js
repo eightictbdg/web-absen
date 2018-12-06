@@ -1,11 +1,11 @@
 module.exports = (sequelize, type) => {
-  return sequelize.define('peran', {
+  return sequelize.define('division', {
     id: {
       type: type.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    nama: {
+    name: {
       type: type.STRING,
       validate: {
         notNull: true

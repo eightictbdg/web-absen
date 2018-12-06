@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
-const AnggotaModel = require('./models/anggota')
-const DivisiModel = require('./models/divisi')
-const JadwalModel = require('./models/jadwal')
-const PeranModel = require('./models/peran')
+const crypto = require('crypto');
+const UserModel = require('./models/user');
+const DivisionModel = require('./models/division');
+const ScheduleModel = require('./models/schedule');
+const RoleModel = require('./models/role');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('./config.js')[env];
@@ -18,25 +19,35 @@ sequelize
   });
 
 
-const Anggota = AnggotaModel(sequelize, Sequelize)
-const Divisi = DivisiModel(sequelize, Sequelize)
-const Jadwal = JadwalModel(sequelize, Sequelize)
-const Peran = PeranModel(sequelize, Sequelize)
+const User = UserModel(sequelize, Sequelize);
+const Division = DivisionModel(sequelize, Sequelize);
+const Schedule = ScheduleModel(sequelize, Sequelize);
+const Role = RoleModel(sequelize, Sequelize);
 
-Anggota.hasMany(Jadwal, {as: 'Absen'});
-Anggota.belongsTo(Divisi);
-Divisi.hasMany(Anggota, {as: 'Anggota'});
-Anggota.belongsTo(Peran);
-Peran.hasMany(Anggota, {as: 'Anggota'});
+User.hasMany(Schedule, {as: 'Absen'});
+User.belongsTo(Division);
+Division.hasMany(User, {as: 'User'});
+User.belongsTo(Role);
+Role.hasMany(User, {as: 'User'});
 
 sequelize.sync({ force: env == 'development' })
-  .then(() => {
-    console.log(`Database & tables synched!`)
-  })
-  
+  .then(function() {
+    console.log(`Database & tables synched!`);
+    User.count().then( function(count) {
+      if (count == 0) {
+        var admin = User.build({
+          name: 'Administrator',
+          username: 'admin',
+          password: crypto.createHash('sha512').update('admin').digest('hex')
+        });
+        admin.save();
+      }
+    });
+  });
+
 module.exports = {
-  Anggota,
-  Divisi,
-  Jadwal,
-  Peran
+  User,
+  Division,
+  Schedule,
+  Role
 }

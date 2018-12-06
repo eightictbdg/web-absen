@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h3>You can register here</h3>
+    <%- include('error'); -%>
+    <form method="POST">
+      <%- form %>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
