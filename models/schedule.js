@@ -1,33 +1,37 @@
 module.exports = (sequelize, type) => {
-  return sequelize.define('jadwal', {
+  return sequelize.define('schedule', {
     id: {
       type: type.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    tanggal: {
+    date: {
       type: type.INTEGER,
+      allowNull: false,
       validate: {
-        notNull: true,
         min: 1,
         max: 31
       }
     },
-    bulan: {
+    month: {
       type: type.INTEGER,
+      allowNull: false,
       validate: {
-        notNull: true,
         min: 1,
         max: 12
       }
     },
-    tahun: {
+    year: {
       type: type.INTEGER,
+      allowNull: false,
       validate: {
-        notNull: true,
         min: 0
       }
     },
-    keterangan: type.STRING
+    info: type.STRING,
+    passkey: {
+      type: type.STRING,
+      allowNull: false
+    }
   })
 }

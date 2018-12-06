@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <%if (locals.user) {%>
+      <p class="error_msg">
+        You are logged in. <br>
+        User name: <%= user.name %> <br>
+        User ID: <%= user.id %>  
+      </p>
+    <%}%>
+    <ul>
+      <li><a href="/">Index</a></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/logout">Logout</a></li>
+      <li><a href="/register">Register</a></li>
+    </ul>
+  </body>
+</html>
