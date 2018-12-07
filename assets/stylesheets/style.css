@@ -1,8 +1,244 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+@font-face {
+	font-family: "Product Sans";
+	src: url(/fonts/product-sans.ttf) format("truetype");
+  }
+  
+  body	{
+				  background-color : white; 
+				  justify-content: center;
+				  color: black;
+				  font-family: 'Product Sans';
+				  padding: 0;
+				  margin: 0;
+				  height: 100%;
+				  width: 100%;
+				  text-align: center;
+			  }
+  .navbar		{
+				  list-style-type: none;
+				  display: block;
+				  margin: 0;
+				  padding: 0;
+				  background-color: #0b121f;
+				  overflow: hidden;
+				  position: sticky;
+				 box-shadow: 0px 1px 10px black;
+				  top:0;
+				  width: 100%;
+				  z-index: 4;				
+		  }
+		  .isinavbar 		{ 
+			  float: right;
+			  display: inline;
+			  z-index: 2; }
+		  .isinavbar a 	{
+			  font-weight: bold;
+			  display: block;
+			  color: white;
+			  text-align: center;
+			  padding: 17px 16px;
+			  text-decoration: none;
+			  z-index: 2;
+			  transition: color 0.5s;
+			  transition: text-shadow 0.2s;
+		  }
+		  .isinavbar a:hover { 
+			  color: #ff3300;
+			  text-shadow: 0px 0px 15px #0099cc;
+		   }
+		  .logo {
+			  padding-left: 5px;
+			  display: inline;
+			  float: left;
+			  height: 60px;
+			  z-index: 2;
+		  }
+  .merah {
+	  color: #ff3300;
+  }
+  .biru {
+	  color: #0099cc;
+  }
+  .header {
+	  position: relative; 
+	  display: flex;
+	  justify-content: center;
+	  width: 100%; 
+	  height: 350px; 
+	  background-image: url(/img/header.jpg); 
+	  background-position: center; 
+	  background-size: cover;
+  }
+  .headerlogin {
+	  margin-bottom: 20px;
+  }
+  .form {
+	  transition-duration: 0.2s;
+	  margin-bottom: 25px;
+	  margin-top: 20px;
+  }
+  .form input {
+	  transition-duration: 0.1s;
+  }
+  input[type="text"], input[type="password"] {
+	  margin-bottom: 10px;
+	  width: 50%;
+	  font-size: 15pt;
+	  border: none;
+	  border-bottom: 1px solid gray;
+	  transition-duration: 0.4s;
+  }
+  
+  input[type="date"]{
+	  font-size: 15pt;
+	  margin-top: 10px;
+	  font-family: "Product Sans";
+	  color: gray;
+	  border: none;
+	  border-bottom: 1px solid gray;
+	  transition-duration: 0.4s;
+  }
+  input[type="date"]:focus{
+	  font-size: 15pt;
+	  margin-top: 10px;
+	  color: black;
+	  font-family: "Product Sans";
+	  border: none;
+	  border-bottom: 1px solid #ff3300;
+  }
+  .button-general {
+	  background-color: #0099cc;
+	  font-size: 15pt;
+	  color: white;
+	  border: 1px solid #faf8f8;
+	  border-radius: 30px;
+	  padding: 5px 30px;
+	  transition-duration: 0.3s;
+	  margin-top: 15px;
+  }
+  .button-general:hover{
+	  background-color: #ff3300;
+  }
+  input[type="text"]:focus, input[type="password"]:focus {
+	  border-bottom: 1px solid #ff4517
+	  
+  }
+  .textbox {	
+			  border: 2px solid white;
+			  min-width: 300px;
+			  max-height: 100pt;
+			  position: relative;
+			  background-color: #0b121f;
+			  color: white;
+			  top: 20%;
+			  box-shadow: 0px 20px 40px 5px rgba(0, 0, 0, 0.9);
+  }
+  .title	{
+			  margin: 15px;
+			  font-weight: 900;
+			  font-size: 40pt;
+			  
+  }
+  .title b { color: #ff3300; }
+  .title a { color: #0099cc; font-weight: normal; }
+  .footer {
+	   position: static;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin-top: 30px;
+	padding-top:2rem;
+	padding-bottom: 1px; 
+	background-color: #efefef;
+	text-align: center;
+	  }
+  .container {
+	  clip: rect(0px,60px,200px,0px);
+	  overflow: hidden;
+  }
+  
+  .bodytext {
+	  text-align: center;
+  }
+  #kegiatan {
+	  display: flex;
+	  justify-content: center;
+	  flex-direction: column;
+  }
+  /*.bodytext p {
+	  text-align: justify;
+	  margin-left: 10%;
+	  width: 80%;
+  } */
+  .bodytext h1 {
+	  margin-bottom: 5px;
+  }
+  
+  #tentang, #kegiatan, #proker {
+	  margin-bottom: 50px;
+  }
+  
+  .bar {
+	  position: relative;
+	  left: 30%;
+	  right: 30%;
+	  height: 3px;
+	  width: 40%;
+	  background-color: #0099cc;
+  }
+  
+  .card {
+	  padding: 15px 30px;
+	  width: 80%;
+	  box-shadow: 0px 1px 10px black;
+	  border-radius: 30px;
+	  margin: 20px 0;
+	  font-family: 'Product Sans';
+  }
+  .card h1 {
+	  margin: 0;
+	  font-family: 'Product Sans';
+  }
+  .cardcontainer {
+	  display: grid;
+	  grid-template-columns: 50% 50%;
+	  margin-top: 10px;
+	  justify-items: center;
+  }
+  
+  #absen {
+	  grid-column: 1;
+  }
+  #register {
+	  grid-column: 2;
+  }
+  .buttoncontainer {
+	  display: inline;
+  }
+  .buttoncontainer button {
+	  margin: 5px 10px;
+  }
+  .error_msg {
+	  background-color: #ff967c;
+	  border: 1px solid #ff2929;
+	  padding: 15px 15px;
+	  width: 70%;
+	margin-left: 14%;
+	  
+  }
+  @media only screen and (max-width: 768px) {
+	  .isinavbar {
+		  display: none;
+	  }
+	  .logo {
+		  float: none;
+	  }
+	  .cardcontainer {
+		  display: block;
+		  margin-left: 5%;
+	  }
+	  .error_msg {
+		  margin-left: 0;
+		  width: 100%;
+	  }
+  }

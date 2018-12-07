@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <h3>You can register here</h3>
+<% include header %>
+    <h1 class="merah"><%= title %></h1>
+    <div class="bar"></div>
     <%- include('error'); -%>
-    <form method="POST">
+    <form method="POST" class="form">
       <%- form %>
-      <button type="submit">Submit</button>
+      <button type="submit" class="button-general">Submit</button>
     </form>
-  </body>
-</html>
+<% include footer %>

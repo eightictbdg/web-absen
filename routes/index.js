@@ -8,11 +8,11 @@ function app(db) {
     if (req.session.logged_in) {
       db.User.findByPk(req.session.user_id)
         .then(function(user) {
-          res.render('index', { title: 'Express', user: user});
+          res.render('index', { title: 'Homepage', user: user});
         });
     }
     else {
-      res.render('index', { title: 'Express' });
+      res.render('index', { title: 'Homepage' });
     }
   });
 

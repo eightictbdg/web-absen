@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<% include header %>
     <h1><%= title %></h1>
-    <h3>Please login</h3>
     <%- include('error'); -%>
     <form method="POST">
       <%- form %>
-      <button type="submit">Submit</button>
+      <button type="submit" class="button-general">Login</button>
     </form>
-  </body>
-</html>
+  <% include footer %>
