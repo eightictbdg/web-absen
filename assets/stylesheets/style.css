@@ -140,7 +140,7 @@
 			  
   }
   .title b { color: #ff3300; }
-  .title a { color: #0099cc; font-weight: normal; }
+  .title a { color: #0099cc; font-weight: bold; }
   .footer {
 	   position: static;
 	right: 0;
