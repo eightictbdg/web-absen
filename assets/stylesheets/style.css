@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Product Sans";
-	src: url(product-sans.ttf) format("truetype");
+	src: url(/fonts/product-sans.ttf) format("truetype");
   }
   
   body	{
