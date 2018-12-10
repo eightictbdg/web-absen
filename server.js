@@ -6,7 +6,7 @@ const session = require('express-session')
 
 const app = express();
 
-const ip_addr = proccess.env.IP || '127.0.0.1';
+const ip_addr = process.env.IP || '127.0.0.1';
 const port = process.env.PORT || 3000;
 
 app.set('views', './views');
