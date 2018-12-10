@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Product Sans";
-	src: url(/fonts/product-sans.ttf) format("truetype");
+	src: url(product-sans.ttf) format("truetype");
   }
   
   body	{
@@ -225,6 +225,42 @@
 	  width: 70%;
 	margin-left: 14%;
 	  
+  }
+  table {
+	  width: 100%;
+	  border-collapse: collapse;
+  }
+  .tabelanggota td {
+	width: 25%;
+	border: 1px solid black;
+  }
+  .tabelanggota thead{
+	vertical-align: middle;
+	height: 40px;
+	font-weight: bold;
+	font-size: 15pt;
+  }
+  .tabelpertemuan tr {
+	border: 1px solid black;
+  }
+ .nomor {
+	width: 10%;
+  }
+.tanggal {
+	width: 45%;
+  }
+
+.tabelpertemuan td {
+	border: 1px solid black;
+}
+  .tabelpertemuan thead{
+	vertical-align: middle;
+	height: 40px;
+	font-weight: bold;
+	font-size: 15pt;
+  }
+  .tabelanggota tr {
+	border: 1px solid black;
   }
   @media only screen and (max-width: 768px) {
 	  .isinavbar {
