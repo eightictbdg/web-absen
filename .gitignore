@@ -1,3 +1,4 @@
 node_modules
-data/dev-db.sqlite3
+database/dev-db.sqlite3
 prototype-design
+sessions

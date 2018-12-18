@@ -35,12 +35,8 @@ sequelize.sync({ force: env == 'development' })
     console.log(`Database & tables synched!`);
     User.count().then( function(count) {
       if (count == 0) {
-        var admin = User.build({
-          name: 'Administrator',
-          username: 'admin',
-          password: crypto.createHash('sha512').update('admin').digest('hex')
-        });
-        admin.save();
+        var db = {User, Division, Schedule, Role};
+        require('./models/_init')(db);
       }
     });
   });

@@ -6,27 +6,8 @@ module.exports = (sequelize, type) => {
       autoIncrement: true
     },
     date: {
-      type: type.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 1,
-        max: 31
-      }
-    },
-    month: {
-      type: type.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 1,
-        max: 12
-      }
-    },
-    year: {
-      type: type.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 0
-      }
+      type: type.STRING,
+      allowNull: false
     },
     info: type.STRING,
     passkey: {

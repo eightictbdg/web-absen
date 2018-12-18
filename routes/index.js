@@ -1,24 +1,22 @@
 const express = require('express');
+const asyncHandler = require('express-async-handler')
 
-function app(db) {
+function init(db) {
   const router = express.Router();
 
   /* GET home page. */
-  router.get('/', function(req, res, next) {
+  router.get('/', asyncHandler(async function index_get(req, res, next) {
     if (req.session.logged_in) {
-      db.User.findByPk(req.session.user_id)
-        .then(function(user) {
-          res.render('index', { title: 'Homepage', user: user});
-        });
+      var user = await db.User.findByPk(req.session.user_id)
+      var role = await user.getRole()
+      res.render('boilerplate', { _template: 'index', title: 'Homepage', user: user, role:role});
     }
     else {
-      res.render('index', { title: 'Homepage' });
+      res.render('boilerplate', { _template: 'index', title: 'Homepage' });
     }
-  });
+  }));
 
   return router;
 }
 
-module.exports = function(db) {
-  return app(db);
-}
+module.exports = init;

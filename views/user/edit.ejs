@@ -1,0 +1,26 @@
+Previous name: <%= user.name %> <br>
+Previous username: <%= user.username %> <br>
+Previous class: <%= user.class %> <br>
+<form method="POST" class="form">
+  <div>
+    <%- form.fields.name.labelHTML() %>
+    <%- form.fields.name.toHTML() %>
+    <%- form.fields.name.errorHTML() %>
+  </div>
+  <div>
+    <%- form.fields.username.labelHTML() %>
+    <%- form.fields.username.toHTML() %>
+    <%- form.fields.username.errorHTML() %>
+  </div>
+  <div>
+    <%- form.fields.class.labelHTML() %>
+    <%- form.fields.class.toHTML() %>
+    <%- form.fields.class.errorHTML() %>
+  </div>
+  <div>
+    <%- form.fields.password.labelHTML() %>
+    <%- form.fields.password.toHTML() %>
+    <%- form.fields.password.errorHTML() %>
+  </div>
+  <button type="submit" class="button-general">Edit</button>
+</form>

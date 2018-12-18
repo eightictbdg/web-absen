@@ -1,0 +1,42 @@
+<table cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>#</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>New</th>
+      <form method="POST" class="form">
+        <th>
+          <%- form.fields.name.toHTML() %> <br>
+        </th>
+        <th>
+          <button type="submit" class="button-general">Add</button>
+        </th>
+      </form>
+    </tr>
+    <tr>
+      <th></th>
+      <th>
+        <% if (form.fields.name.errorHTML()) {%>
+          <%- form.fields.name.errorHTML() %>
+        <% } %>
+      </th>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% roles.forEach(function(role){ %>
+      <tr>
+        <td><a href="role/<%= role.id %>"><%= role.id %></td>
+        <td><%= role.name %></td>
+        <td>
+          <a href="role/<%= role.id %>/update">Edit</a>
+          <a href="role/<%= role.id %>/delete">Delete</a>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
