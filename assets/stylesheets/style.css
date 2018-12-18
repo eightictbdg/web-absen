@@ -258,9 +258,100 @@ input[type="text"]:focus, input[type="password"]:focus {
   margin-left: 14%;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabelanggota td {
+  width: 25%;
+  border: 1px solid black;
+}
+
+.tabelanggota thead{
+  vertical-align: middle;
+  height: 40px;
+  font-weight: bold;
+  font-size: 15pt;
+}
+
+.tabelpertemuan tr {
+  border: 1px solid black;
+}
+
+.nomor {
+  width: 10%;
+}
+
+.tanggal {
+  width: 45%;
+}
+
+.tabelpertemuan td {
+  border: 1px solid black;
+}
+
+.tabelpertemuan thead{
+  vertical-align: middle;
+  height: 40px;
+  font-weight: bold;
+  font-size: 15pt;
+}
+
+.tabelanggota tr {
+  border: 1px solid black;
+}
+
+.button-drop {
+  background-color: black;
+  display: none;
+}
+
+.down-icon {
+  max-height: 10px;
+  min-width: 30px;
+}
+
+.down-icon {
+  filter: invert(100%);
+}
+
+.menu-drop {
+  display: none;
+}
+
+.button-transparent {
+  background-color: #ffffff00;
+  border: none;
+}
+
+.isidropdown a  {
+  font-weight: bold;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 7px 16px;
+  text-decoration: none;
+  z-index: 2;
+  transition: background-color 0.5s;
+  transition: text-shadow 0.2s;
+  border-bottom: 1px solid #12182b;
+}
+
+.isidropdown a:hover { 
+  background-color: #141d36;
+}
+
 @media only screen and (max-width: 768px) {
   .isinavbar {
     display: none;
+  }
+  .button-drop {
+    display: block;
+  }
+  .show {
+    display: block;
+    background-color: #090d18;
   }
   .logo {
     float: none;

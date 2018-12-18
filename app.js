@@ -8,9 +8,10 @@ const db = require('./db');
 // init Express
 const app = express();
 
-const ip_addr = '127.0.0.1';
-const port = 3000;
+const ip_addr = process.env.IP || '0.0.0.0';
+const port = process.env.PORT || 3000;
 const secret = "eight ict web absen";
+
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
