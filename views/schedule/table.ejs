@@ -12,18 +12,11 @@
     <tr>
       <th>New</th>
       <form method="POST" class="form">
+        <th><%- form.fields.date.toHTML() %></th>
+        <th><%- form.fields.info.toHTML() %></th>
+        <th><%- form.fields.passkey.toHTML() %></th>
         <th>
-          <%- form.fields.date.toHTML() %> <br>
-        </th>
-        <th>
-          <%- form.fields.info.toHTML() %> <br>
-        </th>
-        <th>
-          <%- form.fields.passkey.toHTML() %> <br>
-        </th>
-        <th>
-          <button type="submit" class="button-general">Add</button>
-        </th>
+          <button type="submit" class="button-general">Add</button></th>
       </form>
     </tr>
     <tr>
