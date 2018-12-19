@@ -18,7 +18,7 @@ function init(db) {
         // form.data contains the submitted data
         var user = await db.User.findOne({ where: {username: form.data.username} });
         if (user) {
-          var error = 'Username already exist.'
+          var error = 'Username already exists.'
           res.render('boilerplate', { _template: 'register', title: 'Register', form: form.toHTML(), error: error });
         }
         else {

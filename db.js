@@ -24,7 +24,8 @@ const Division = DivisionModel(sequelize, Sequelize);
 const Schedule = ScheduleModel(sequelize, Sequelize);
 const Role = RoleModel(sequelize, Sequelize);
 
-User.hasMany(Schedule, {as: 'Absen'});
+Schedule.belongsToMany(User, {through: 'UserSchedule'});
+User.belongsToMany(Schedule, {through: 'UserSchedule'});
 User.belongsTo(Division);
 Division.hasMany(User, {as: 'User'});
 User.belongsTo(Role);

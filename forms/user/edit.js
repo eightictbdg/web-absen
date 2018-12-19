@@ -1,6 +1,7 @@
 const forms = require('forms');
 const fields = forms.fields;
 const validators = forms.validators;
+const widgets = forms.widgets;
  
 module.exports = function() {
   return forms.create({
@@ -10,17 +11,29 @@ module.exports = function() {
       inputOnly: true,
       required: validators.required('Please enter a name') 
     }),
+    username: fields.string({
+      label: 'Username: ',
+      hideError: true,
+      inputOnly: true,
+      required: validators.required('Please enter a username') 
+    }),
     class: fields.string({
       label: 'Class: ',
       hideError: true,
       inputOnly: true,
       required: validators.required('Please enter a class name') 
     }),
-    username: fields.string({
-      label: 'Username: ',
+    division: fields.string({
+      widget: widgets.select(),
+      label: ' Division: ',
       hideError: true,
-      inputOnly: true,
-      required: validators.required('Please enter a username') 
+      inputOnly: true
+    }),
+    role: fields.string({
+      widget: widgets.select(),
+      label: ' Role: ',
+      hideError: true,
+      inputOnly: true
     }),
     password: fields.password({
       label: 'Password: ',

@@ -1,0 +1,9 @@
+<% if (locals.form) { %>
+  <form method="POST" class="form">
+    <%- form.fields.passkey.labelHTML() %>
+    <%- form.fields.passkey.toHTML() %>
+    <button type="submit" class="button-general">Attend</button>
+  </form>
+<% } else { %>
+  <%= locals.message  %>
+<% } %>

@@ -1,4 +1,8 @@
 ID: <%= role.id %> <br>
 Date: <%= role.name %> <br>
+Users: <br>
+<% role.users.forEach(function(user){ %>
+  - <a href="/panel/admin/user/<%= user.id %>"><%= user.name %> </a><br>
+<% }) %>
 <a href="<%= role.id %>/update">Edit</a> <br>
 <a href="<%= role.id %>/delete">Delete</a>

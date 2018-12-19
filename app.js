@@ -1,7 +1,8 @@
 const express = require('express');
-const crypto = require('crypto');
+const flash = require('express-flash');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const crypto = require('crypto');
 
 const db = require('./db');
 
@@ -16,12 +17,13 @@ const secret = "eight ict web absen";
 app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use(express.static('./assets'));
+app.use(flash());
 app.use(session({
   secret: secret,
   resave: false,
   saveUninitialized: false,
   store: new FileStore,
-  cookie: { secure: false,}
+  cookie: { secure: false }
 }));
 
 var indexRouter = require('./routes/index')(db);

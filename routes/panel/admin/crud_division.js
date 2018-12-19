@@ -11,7 +11,7 @@ function sub(router, db) {
   /* GET division table page */
   router.get('/panel/admin/division', asyncHandler(async function division_table_get(req, res, next) {
     var divisions = await db.Division.findAll();
-    res.render('division/table', {divisions: divisions, form: create_division_form});
+    res.render('boilerplate', { _template: 'division/table', divisions: divisions, form: create_division_form });
   }));
 
   /* POST create division page */
@@ -21,31 +21,28 @@ function sub(router, db) {
         var division = await db.Division.create({
           name: form.data.name
         });
-        var divisions = await db.Division.findAll();
-        res.render('division/table', {divisions: divisions, form: create_division_form});
+        req.flash('info','Success!')
+        res.redirect('/panel/admin/division')
       },
-      error: async function (form) {
+      other: async function (form) {
         var divisions = await db.Division.findAll();
-        res.render('division/table', {divisions: divisions, form: form});
-      },
-      empty: async function (form) {
-        var divisions = await db.Division.findAll();
-        res.render('division/table', {divisions: divisions, form: form});
+        res.render('boilerplate', { _template: 'division/table', divisions: divisions, form: form });
       }
     });
   }));
 
   /* GET read division page */
-  router.get('/panel/admin/division/:divisionId', asyncHandler(async function add_division_post(req, res, next) {
+  router.get('/panel/admin/division/:divisionId', asyncHandler(async function read_division_get(req, res, next) {
     var division = await db.Division.findByPk(req.params.divisionId);
     if (division) {
-      res.render('division/read', { division: division });
+      division.users = await division.getUser();
+      res.render('boilerplate', { _template: 'division/read', division: division });
     }
     else res.sendStatus(404);
   }));
 
   /* GET update division page */
-  router.get('/panel/admin/division/:divisionId/update', asyncHandler(async function add_division_post(req, res, next) {
+  router.get('/panel/admin/division/:divisionId/update', asyncHandler(async function update_division_get(req, res, next) {
     var division = await db.Division.findByPk(req.params.divisionId);
     if (division) {
       edit_division_form.fields.name.value = division.name;
@@ -55,23 +52,19 @@ function sub(router, db) {
   }));
 
   /* POST update division page */
-  router.post('/panel/admin/division/:divisionId/update', asyncHandler(async function add_division_post(req, res, next) {
+  router.post('/panel/admin/division/:divisionId/update', asyncHandler(async function update_division_post(req, res, next) {
     edit_division_form.handle(req, {
       success: async function (form) {
         var division = await db.Division.findByPk(req.params.divisionId);
         if (division) {
           division.name = form.data.name;
           division.save();
+          req.flash('info','Success!')
           res.redirect('/panel/admin/division')
         }
         else res.sendStatus(404);
       },
-      error: async function (form) {
-        var division = await db.Division.findByPk(req.params.divisionId);
-        if (division) res.render('division/edit', { division: division, form: form });
-        else res.sendStatus(404);
-      },
-      empty: async function (form) {
+      other: async function (form) {
         var division = await db.Division.findByPk(req.params.divisionId);
         if (division) res.render('division/edit', { division: division, form: form });
         else res.sendStatus(404);
@@ -80,10 +73,11 @@ function sub(router, db) {
   }));
 
   /* GET delete division page */
-  router.get('/panel/admin/division/:divisionId/delete', asyncHandler(async function add_division_post(req, res, next) {
+  router.get('/panel/admin/division/:divisionId/delete', asyncHandler(async function delete_division_get(req, res, next) {
     var division = await db.Division.findByPk(req.params.divisionId);
     if (division) {
-      division.destroy();
+      await division.destroy();
+      req.flash('info','Success!')
       res.redirect('/panel/admin/division')
     }
     else res.sendStatus(404);

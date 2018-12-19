@@ -11,26 +11,21 @@ function sub(router, db) {
   /* GET role table page */
   router.get('/panel/admin/role', asyncHandler(async function role_table_get(req, res, next) {
     var roles = await db.Role.findAll();
-    res.render('role/table', {roles: roles, form: create_role_form});
+    res.render('boilerplate', { _template:'role/table', roles: roles, form: create_role_form });
   }));
 
   /* POST create role page */
   router.post('/panel/admin/role', asyncHandler(async function add_role_post(req, res, next) {
     create_role_form.handle(req, {
       success: async function (form) {
-        var role = await db.Role.create({
-          name: form.data.name
-        });
+        var role = await db.Role.create({ name: form.data.name });
         var roles = await db.Role.findAll();
-        res.render('role/table', {roles: roles, form: create_role_form});
+        req.flash('info','Success!')
+        res.redirect('/panel/admin/role')
       },
-      error: async function (form) {
+      other: async function (form) {
         var roles = await db.Role.findAll();
-        res.render('role/table', {roles: roles, form: form});
-      },
-      empty: async function (form) {
-        var roles = await db.Role.findAll();
-        res.render('role/table', {roles: roles, form: form});
+        res.render('boilerplate', { _template:'role/table', roles: roles, form: form });
       }
     });
   }));
@@ -39,7 +34,8 @@ function sub(router, db) {
   router.get('/panel/admin/role/:roleId', asyncHandler(async function add_role_post(req, res, next) {
     var role = await db.Role.findByPk(req.params.roleId);
     if (role) {
-      res.render('role/read', { role: role });
+      role.users = await role.getUser();
+      res.render('boilerplate', { _template: 'role/read', role: role });
     }
     else res.sendStatus(404);
   }));
@@ -62,16 +58,12 @@ function sub(router, db) {
         if (role) {
           role.name = form.data.name;
           role.save();
+          req.flash('info','Success!')
           res.redirect('/panel/admin/role')
         }
         else res.sendStatus(404);
       },
-      error: async function (form) {
-        var role = await db.Role.findByPk(req.params.roleId);
-        if (role) res.render('role/edit', { role: role, form: form });
-        else res.sendStatus(404);
-      },
-      empty: async function (form) {
+      other: async function (form) {
         var role = await db.Role.findByPk(req.params.roleId);
         if (role) res.render('role/edit', { role: role, form: form });
         else res.sendStatus(404);
@@ -84,6 +76,7 @@ function sub(router, db) {
     var role = await db.Role.findByPk(req.params.roleId);
     if (role) {
       role.destroy();
+      req.flash('info','Success!')
       res.redirect('/panel/admin/role')
     }
     else res.sendStatus(404);

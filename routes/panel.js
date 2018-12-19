@@ -5,6 +5,7 @@ function init(db) {
   const router = express.Router();
 
   require('./panel/admin')(router,db);
+  require('./panel/member')(router,db);
 
   /* GET panel page. */
   router.get('/panel', asyncHandler(async function admin_panel(req, res, next) {
@@ -15,7 +16,13 @@ function init(db) {
         res.redirect('/panel/admin');
       }
       else if (role.name == 'Pengurus') {
-        res.redirect('/panel/pengurus');
+        res.redirect('/panel/manager');
+      }
+      else if (role.name == 'Anggota') {
+        res.redirect('/panel/member');
+      }
+      else if (role.name == 'Calon Anggota') {
+        res.redirect('/panel/initiate');
       }
       res.render('index', { title: 'Homepage', user: user, role:role});
     }

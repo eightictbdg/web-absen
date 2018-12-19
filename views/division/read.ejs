@@ -1,4 +1,8 @@
 ID: <%= division.id %> <br>
 Date: <%= division.name %> <br>
+Users: <br>
+<% division.users.forEach(function(user){ %>
+  - <a href="/panel/admin/user/<%= user.id %>"><%= user.name %> </a><br>
+<% }) %>
 <a href="<%= division.id %>/update">Edit</a> <br>
 <a href="<%= division.id %>/delete">Delete</a>

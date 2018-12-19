@@ -16,11 +16,7 @@
     </tr>
     <tr>
       <th></th>
-      <th>
-        <% if (form.fields.name.errorHTML()) {%>
-          <%- form.fields.name.errorHTML() %>
-        <% } %>
-      </th>
+      <th><%- form.fields.name.errorHTML() || '' %></th>
     </tr>
   </tfoot>
   <tbody>

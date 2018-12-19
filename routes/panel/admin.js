@@ -7,8 +7,10 @@ function sub(router, db) {
   router.use('/panel/admin', asyncHandler(async function isAdminMiddleware(req, res, next) {
     if (req.session.logged_in) {
       var user = await db.User.findByPk(req.session.user_id);
+      if (!user) res.redirect('/logout')
       var role = await user.getRole();
       if (role.name == 'Administrator') {
+        res.locals.title = 'Admin Panel'
         next();
       }
       else res.redirect('/');
@@ -19,7 +21,7 @@ function sub(router, db) {
   
   /* GET panel page. */
   router.get('/panel/admin', asyncHandler(async function admin_panel_get(req, res, next) {
-    res.render('panel_admin', { title: 'Admin Panel'});
+    res.render('boilerplate', { _template: 'panel_admin', title: 'Admin Panel'});
   }));
 
   require('./admin/crud_schedule.js')(router,db);

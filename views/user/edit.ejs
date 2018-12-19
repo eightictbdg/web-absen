@@ -1,6 +1,8 @@
 Previous name: <%= user.name %> <br>
 Previous username: <%= user.username %> <br>
 Previous class: <%= user.class %> <br>
+Previous division: <%= user.division ? user.division.name : '-' %> <br>
+Previous role: <%= user.role.name %> <br>
 <form method="POST" class="form">
   <div>
     <%- form.fields.name.labelHTML() %>
@@ -16,6 +18,16 @@ Previous class: <%= user.class %> <br>
     <%- form.fields.class.labelHTML() %>
     <%- form.fields.class.toHTML() %>
     <%- form.fields.class.errorHTML() %>
+  </div>
+  <div>
+    <%- form.fields.division.labelHTML() %>
+    <%- form.fields.division.toHTML() %>
+    <%- form.fields.division.errorHTML() %>
+  </div>
+  <div>
+    <%- form.fields.role.labelHTML() %>
+    <%- form.fields.role.toHTML() %>
+    <%- form.fields.role.errorHTML() %>
   </div>
   <div>
     <%- form.fields.password.labelHTML() %>

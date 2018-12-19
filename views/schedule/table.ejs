@@ -20,21 +20,9 @@
     </tr>
     <tr>
       <th></th>
-      <th>
-        <% if (form.fields.date.errorHTML()) {%>
-          <%- form.fields.date.errorHTML() %>
-        <% } %>
-      </th>
-      <th>
-        <% if (form.fields.info.errorHTML()) {%>
-          <%- form.fields.info.errorHTML() %>
-        <% } %>
-      </th>
-      <th>
-        <% if (form.fields.passkey.errorHTML()) {%>
-          <%- form.fields.passkey.errorHTML() %>
-        <% } %>
-      </th>
+      <th><%- form.fields.date.errorHTML() || '' %></th>
+      <th><%- form.fields.info.errorHTML() || '' %></th>
+      <th><%- form.fields.passkey.errorHTML() || '' %></th>
     </tr>
   </tfoot>
   <tbody>

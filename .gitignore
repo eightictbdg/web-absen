@@ -1,4 +1,5 @@
 node_modules
 database/dev-db.sqlite3
+database/test-db.sqlite3
 prototype-design
 sessions
