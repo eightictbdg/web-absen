@@ -76,7 +76,7 @@ function sub(router, db) {
       edit_user_form.fields.name.value = user.name;
       edit_user_form.fields.username.value = user.username;
       edit_user_form.fields.class.value = user.class;
-      res.render('user/edit', { user: user, form: edit_user_form });
+      res.render('boilerplate', {_template: 'user/edit', user: user, form: edit_user_form });
     }
     else res.sendStatus(404);
   }));
@@ -102,7 +102,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var user = await db.User.findByPk(req.params.userId);
-        if (user) res.render('user/edit', { user: user, form: form });
+        if (user) res.render('boilerplate', {_template: 'user/edit', user: user, form: form });
         else res.sendStatus(404);
       }
     });

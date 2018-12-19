@@ -45,7 +45,7 @@ function sub(router, db) {
     var role = await db.Role.findByPk(req.params.roleId);
     if (role) {
       edit_role_form.fields.name.value = role.name;
-      res.render('role/edit', { role: role, form: edit_role_form });
+      res.render('boilerplate', {_template:'role/edit', role: role, form: edit_role_form });
     }
     else res.sendStatus(404);
   }));
@@ -65,7 +65,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var role = await db.Role.findByPk(req.params.roleId);
-        if (role) res.render('role/edit', { role: role, form: form });
+        if (role) res.render('boilerplate', {_template:'role/edit', role: role, form: form });
         else res.sendStatus(404);
       }
     });
