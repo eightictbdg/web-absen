@@ -1,3 +1,6 @@
+<h1 class="merah">User</h1>
+<div class="bar"></div>
+<br>
 ID: <%= user.id %> <br>
 Name: <%= user.name %> <br>
 Username: <%= user.username %> <br>
@@ -5,5 +8,5 @@ Class: <%= user.class %> <br>
 Division: <%- user.division ? '<a href="/panel/admin/division/' + user.division.id + '">' + user.division.name + '</a>' : '' %> <br>
 Role: <%- user.role ? '<a href="/panel/admin/role/' + user.role.id + '">' + user.role.name + '</a>' : '' %> <br>
 Password Hash: <%= user.password %> <br>
-<a href="<%= user.id %>/update">Edit</a> <br>
-<a href="<%= user.id %>/delete">Delete</a>
+<a href="<%= user.id %>/update"><button class="button-general">Edit</button></a> <br>
+<a href="<%= user.id %>/delete"><button class="button-general">Delete</button></a>

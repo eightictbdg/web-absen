@@ -258,6 +258,14 @@ input[type="text"]:focus, input[type="password"]:focus {
   margin-left: 14%;
 }
 
+.info_msg {
+  background-color: #907cff;
+  border: 1px solid #6229ff;
+  padding: 15px 15px;
+  width: 70%;
+  margin-left: 14%;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -268,7 +276,7 @@ table {
   border: 1px solid black;
 }
 
-.tabelanggota thead{
+.tabelanggota thead th{
   vertical-align: middle;
   height: 40px;
   font-weight: bold;
@@ -298,7 +306,7 @@ table {
   font-size: 15pt;
 }
 
-.tabelanggota tr {
+.tabelanggota tr th{
   border: 1px solid black;
 }
 
@@ -362,7 +370,7 @@ table {
     display: block;
     margin-left: 5%;
   }
-  .error_msg {
+  .error_msg .info_msg {
     margin-left: 0;
     width: 100%;
   }

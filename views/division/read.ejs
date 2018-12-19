@@ -1,8 +1,11 @@
+<h1 class="merah">Division</h1>
+<div class="bar"></div>
+<br>
 ID: <%= division.id %> <br>
-Date: <%= division.name %> <br>
+Name: <%= division.name %> <br>
 Users: <br>
 <% division.users.forEach(function(user){ %>
   - <a href="/panel/admin/user/<%= user.id %>"><%= user.name %> </a><br>
 <% }) %>
-<a href="<%= division.id %>/update">Edit</a> <br>
-<a href="<%= division.id %>/delete">Delete</a>
+<a href="<%= division.id %>/update"><button class="button-general">Edit</button></a> <br>
+<a href="<%= division.id %>/delete"><button class="button-general">Delete</button></a>
