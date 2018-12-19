@@ -8,7 +8,12 @@ function init(db) {
   var register_form = require('../forms/register');
 
   router.get('/register', function register_get(req,res,next) {
+    if (req.session.logged_in) {
+      res.redirect('/');
+    }
+    else {
     res.render('boilerplate', { _template: 'register', title: 'Register', form: register_form.toHTML() });
+    }
   });
 
   router.post('/register', asyncHandler(async function register_post(req,res,next) {

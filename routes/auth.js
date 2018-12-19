@@ -10,7 +10,12 @@ function init(db) {
 
   /* GET login page. */
   router.get('/login', function login_get(req, res, next) {
+    if (req.session.logged_in) {
+      res.redirect('/');
+    }
+    else {
     res.render('boilerplate', { _template: 'login', title: 'Login', form: login_form.toHTML() });
+    }
   });
 
   /* POST login page. */
