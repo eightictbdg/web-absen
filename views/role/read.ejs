@@ -1,11 +1,18 @@
 <h1 class="merah">Role</h1>
 <div class="bar"></div>
 <br>
-ID: <%= role.id %> <br>
-Name: <%= role.name %> <br>
-Users: <br>
-<% role.users.forEach(function(user){ %>
-  - <a href="/panel/admin/user/<%= user.id %>"><%= user.name %> </a><br>
-<% }) %>
-<a href="<%= role.id %>/update"><button class="btn btn-success">Edit</button></a> <br>
-<a href="<%= role.id %>/delete"><button class="btn btn-danger">Delete</button></a> 
+<ul class="list-group">
+    <li class="list-group-item active"><%= role.name %></li>
+    <li class="list-group-item">ID: <%= role.id %></li>
+    <li class="list-group-item">Users: <br>
+    <div class="list-group">
+        <% role.users.forEach(function(user){ %>
+          <a class="list-group-item list-group-item-action list-group-item-primary" href="/panel/admin/user/<%= user.id %>"><%= user.name %></a>
+        <% }) %>
+    </div>
+    </li>
+  </ul>
+  <br>
+    <a href="<%= role.id %>/update"><button class="btn btn-success">Edit</button></a> <span>
+    <a href="<%= role.id %>/delete"><button class="btn btn-danger">Delete</button></a> 
+

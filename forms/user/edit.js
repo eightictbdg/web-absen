@@ -24,13 +24,21 @@ module.exports = function() {
       required: validators.required('Please enter a class name') 
     }),
     division: fields.string({
-      widget: widgets.select(),
+      widget: widgets.select(
+        {
+          classes: ['form-control','form-control-sm','dropdown']
+        }
+      ),
       label: ' Division: ',
       hideError: true,
       inputOnly: true
     }),
     role: fields.string({
-      widget: widgets.select(),
+      widget: widgets.select(
+        {
+          classes: ['form-control','form-control-sm','dropdown']
+        }
+      ),
       label: ' Role: ',
       hideError: true,
       inputOnly: true

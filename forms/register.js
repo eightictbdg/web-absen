@@ -5,11 +5,19 @@ const widgets = forms.widgets;
  
 var register_form = forms.create({
   division: fields.string({
-    widget: widgets.select(),
+    widget: widgets.select(
+      {
+        classes: ['form-control','form-control-sm','dropdown']
+      }
+    ),
     label: ' Division: '
   }),
   role: fields.string({
-    widget: widgets.select(),
+    widget: widgets.select(
+      {
+        classes: ['form-control','form-control-sm','dropdown']
+      }
+    ),
     label: ' Role: '
   }),
   name: fields.string({

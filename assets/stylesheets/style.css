@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
   font-family: "Product Sans";
   src: url(/fonts/product-sans.ttf) format("truetype");
 }
@@ -59,7 +59,7 @@ body	{
   height: 60px;
   z-index: 2;
 }
-
+*/
 .merah {
   color: #ff3300;
 }
@@ -67,7 +67,7 @@ body	{
 .biru {
   color: #0099cc;
 }
-
+/*
 .header {
   position: relative; 
   display: flex;
@@ -82,7 +82,7 @@ body	{
 .headerlogin {
   margin-bottom: 20px;
 }
-
+*/
 .form {
   transition-duration: 0.2s;
   margin-bottom: 25px;
@@ -96,20 +96,24 @@ body	{
 input[type="text"], input[type="password"] {
   margin-bottom: 10px;
   width: 50%;
-  font-size: 15pt;
-  border: none;
-  border-bottom: 1px solid gray;
+  font-size: 12pt;
+  border: 1px solid rgb(221, 221, 221);
   transition-duration: 0.4s;
+  padding: 3px 5px;
+  border-radius: 8px;
+}
+
+.dropdown {
+  margin: 5px 0;
 }
 
 input[type="date"]{
   font-size: 15pt;
   margin-top: 10px;
-  font-family: "Product Sans";
   color: gray;
-  border: none;
-  border-bottom: 1px solid gray;
+  border: 1px solid rgb(221, 221, 221);
   transition-duration: 0.4s;
+  border-radius: 8px;
 }
 
 input[type="date"]:focus{
@@ -117,10 +121,13 @@ input[type="date"]:focus{
   margin-top: 10px;
   color: black;
   font-family: "Product Sans";
-  border: none;
-  border-bottom: 1px solid #ff3300;
+  border: 1px solid #7d86ff;
 }
 
+input[type="text"]:focus, input[type="password"]:focus {
+  border: 1px solid #7d86ff;
+}
+/*
 .button-general {
   background-color: #0099cc;
   font-size: 15pt;
@@ -134,10 +141,6 @@ input[type="date"]:focus{
 
 .button-general:hover{
   background-color: #ff3300;
-}
-
-input[type="text"]:focus, input[type="password"]:focus {
-  border-bottom: 1px solid #ff4517
 }
 
 .textbox {	
@@ -195,7 +198,7 @@ input[type="text"]:focus, input[type="password"]:focus {
   width: 80%;
 }
 */
-
+/*
 .bodytext h1 {
   margin-bottom: 5px;
 }
@@ -203,7 +206,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 #tentang, #kegiatan, #proker {
   margin-bottom: 50px;
 }
-
+*/
 .bar {
   position: relative;
   left: 30%;
@@ -211,8 +214,9 @@ input[type="text"]:focus, input[type="password"]:focus {
   height: 3px;
   width: 40%;
   background-color: #0099cc;
+  margin-bottom: 8px;
 }
-
+/*
 .card {
   padding: 15px 30px;
   width: 80%;
@@ -249,7 +253,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 .buttoncontainer button {
   margin: 5px 10px;
 }
-
+*/
 .error_msg {
   background-color: #ff967c;
   border: 1px solid #ff2929;
@@ -265,7 +269,7 @@ input[type="text"]:focus, input[type="password"]:focus {
   width: 70%;
   margin-left: 14%;
 }
-
+/*
 table {
   width: 100%;
   border-collapse: collapse;
@@ -378,4 +382,4 @@ table {
     margin-left: 0;
     width: 100%;
   }
-}
+}*/

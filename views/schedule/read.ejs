@@ -1,13 +1,19 @@
 <h1 class="merah">Schedule</h1>
 <div class="bar"></div>
 <br>
-ID: <%= schedule.id %> <br>
-Date: <%= schedule.date %> <br>
-Info: <%= schedule.info %> <br>
-Passkey: <%= schedule.passkey %> <br>
-<a href="<%= schedule.id %>/update"><button class="button-general">Edit</button></a> <br>
-<a href="<%= schedule.id %>/delete"><button class="button-general">Delete</button></a> <br>
-Who attended: <br>
-<% users.forEach(function(user){ %>
-  - <a href="/panel/admin/user/<%= user.id %>"><%= user.name %></a>
-<% }) %>
+<ul class="list-group">
+    <li class="list-group-item active"><%= schedule.date %></li>
+    <li class="list-group-item">ID: <%= schedule.id %></li>
+    <li class="list-group-item">Info: <%= schedule.info %></li>
+    <li class="list-group-item">Passkey: <%= schedule.passkey %></li>
+    <li class="list-group-item">
+      Who attended: <br>
+      <div class="list-group">
+      <% users.forEach(function(user){ %>
+        <a class="list-group-item list-group-item-action" href="/panel/admin/user/<%= user.id %>"><%= user.name %></a>
+      <% }) %>
+      </div></li>
+</ul>
+<br>
+<a href="<%= schedule.id %>/update"><button class="btn btn-success">Edit</button></a> <span>
+<a href="<%= schedule.id %>/delete"><button class="btn btn-danger">Delete</button></a> <br>

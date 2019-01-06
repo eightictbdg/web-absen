@@ -4,6 +4,7 @@ Previous class: <%= user.class %> <br>
 Previous division: <%= user.division ? user.division.name : '-' %> <br>
 Previous role: <%= user.role.name %> <br>
 <form method="POST" class="form">
+  <div class="border rounded bg-light">
   <div>
     <%- form.fields.name.labelHTML() %>
     <%- form.fields.name.toHTML() %>
@@ -34,5 +35,6 @@ Previous role: <%= user.role.name %> <br>
     <%- form.fields.password.toHTML() %>
     <%- form.fields.password.errorHTML() %>
   </div>
+  </div> <br>
   <button type="submit" class="btn btn-success">Edit</button>
 </form>
