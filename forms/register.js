@@ -1,8 +1,17 @@
 const forms = require('forms');
 const fields = forms.fields;
 const validators = forms.validators;
+const widgets = forms.widgets;
  
 var register_form = forms.create({
+  division: fields.string({
+    widget: widgets.select(),
+    label: ' Division: '
+  }),
+  role: fields.string({
+    widget: widgets.select(),
+    label: ' Role: '
+  }),
   name: fields.string({
     label: 'Name: ',
     required: validators.required('Please enter a name') 

@@ -350,6 +350,10 @@ table {
   background-color: #141d36;
 }
 
+.text-left {
+  text-align: left;
+}
+
 @media only screen and (max-width: 768px) {
   .isinavbar {
     display: none;

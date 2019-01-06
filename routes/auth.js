@@ -7,14 +7,13 @@ function init(db) {
 
   var login_form = require('../forms/login')
 
-
   /* GET login page. */
   router.get('/login', function login_get(req, res, next) {
     if (req.session.logged_in) {
       res.redirect('/');
     }
     else {
-    res.render('boilerplate', { _template: 'login', title: 'Login', form: login_form.toHTML() });
+      res.render('boilerplate', { _template: 'login', title: 'Login', form: login_form.toHTML() });
     }
   });
 
@@ -29,11 +28,13 @@ function init(db) {
         if (user) {
           req.session.logged_in = true;
           req.session.user_id = user.id;
-          res.redirect('/');
+          req.session.save(function() {
+            res.redirect('/');
+          });
         }
         else {
-          var error = 'Wrong username or password.'
-          res.render('boilerplate', { _template: 'login', title: 'Login', form: login_form.toHTML(), error: error });
+          req.flash('error','Wrong username or password.')
+          res.render('boilerplate', { _template: 'login', title: 'Login', form: login_form.toHTML()});
         }
       },
       other: function (form) {
@@ -45,7 +46,9 @@ function init(db) {
   router.get('/logout', function logout_get(req, res, next) {
     req.session.logged_in = false;
     req.session.user_id = null;
-    res.redirect('/');
+    req.session.save(function() {
+      res.redirect('/');
+    });
   });
 
   return router;

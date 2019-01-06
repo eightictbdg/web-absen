@@ -18,7 +18,6 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-
 const User = UserModel(sequelize, Sequelize);
 const Division = DivisionModel(sequelize, Sequelize);
 const Schedule = ScheduleModel(sequelize, Sequelize);

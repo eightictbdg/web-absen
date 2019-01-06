@@ -5,7 +5,9 @@ function init(db) {
   const router = express.Router();
 
   require('./panel/admin')(router,db);
+  require('./panel/manager')(router,db);
   require('./panel/member')(router,db);
+  require('./panel/initiate')(router,db);
 
   /* GET panel page. */
   router.get('/panel', asyncHandler(async function admin_panel(req, res, next) {

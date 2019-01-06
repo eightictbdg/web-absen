@@ -17,7 +17,7 @@ const secret = "eight ict web absen";
 app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use(express.static('./assets'));
-app.use(flash());
+
 app.use(session({
   secret: secret,
   resave: false,
@@ -25,6 +25,8 @@ app.use(session({
   store: new FileStore,
   cookie: { secure: false }
 }));
+
+app.use(flash());
 
 var indexRouter = require('./routes/index')(db);
 var loginRouter = require('./routes/auth')(db);
