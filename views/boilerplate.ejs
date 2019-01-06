@@ -15,7 +15,7 @@
 			<ul class="navbar">
 				<li class="logo"><img src="/img/logo.jpg" class="logo" ></li>
 				<li class="isinavbar"><a href="/">Home</a></li>
-				<%if (locals.user) {%>
+				<%if (locals._logged_in) {%>
 				<li class="isinavbar"><a href="/logout">Logout</a></li>
 				<%} else {%>
 				<li class="isinavbar"><a href="/login">Login</a></li>
@@ -24,7 +24,7 @@
 				<li class="button-drop"><button onclick="showDropdown()" class="button-transparent"><img src="/img/down-icon.png" class="down-icon"></button></li>
 				<div class="menu-drop" id="menu-drop">
 					<li class="isidropdown"><a href="/">Home</a></li>
-				<%if (locals.user) {%>
+					<%if (locals._logged_in) {%>
 					<li class="isidropdown"><a href="/logout">Logout</a></li>
 					<%} else {%>
 					<li class="isidropdown"><a href="/login">Login</a></li>

@@ -6,7 +6,7 @@
     You are logged in. <br>
     User name: <%= user.name %> <br>
     User ID: <%= user.id %> <br>
-    User Role: <%= role.name %>  
+    User Role: <%= role ? role.name : '-' %>  
   </p>
   <a href="/panel"><button class="button-general" type="button">Panel</button></a>
   <a href="/logout"><button class="button-general" type="button">Logout</button></a>
