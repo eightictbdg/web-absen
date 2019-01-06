@@ -1,8 +1,8 @@
 <h1 class="merah">Roles</h1>
 <div class="bar"></div>
 <br>
-<table cellspacing="0">
-  <thead>
+<table cellspacing="0" class="table">
+  <thead class="thead-light">
     <tr>
       <th>ID</th>
       <th>Name</th>
@@ -14,7 +14,7 @@
       <th>New</th>
       <form method="POST" class="form">
         <th><%- form.fields.name.toHTML() %></th>
-        <th><button type="submit" class="button-general">Add</button></th>
+        <th><button type="submit" class="btn btn-primary">Add</button></th>
       </form>
     </tr>
     <tr>
