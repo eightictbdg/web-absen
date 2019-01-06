@@ -43,7 +43,8 @@ function sub(router, db) {
   router.get('/panel/admin/schedule/:scheduleId', asyncHandler(async function read_schedule_get(req, res, next) {
     var schedule = await db.Schedule.findByPk(req.params.scheduleId);
     if (schedule) {
-      res.render('boilerplate', { _template: 'schedule/read', schedule: schedule });
+      var users = await schedule.getUsers();
+      res.render('boilerplate', { _template: 'schedule/read', schedule: schedule, users: users });
     }
     else res.sendStatus(404);
   }));
