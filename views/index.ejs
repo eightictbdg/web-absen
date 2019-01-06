@@ -8,12 +8,12 @@
     User ID: <%= user.id %> <br>
     User Role: <%= role.name %>  
   </p>
-  <a href="/panel"><button class="button-general" type="button">Panel</button></a>
-  <a href="/logout"><button class="button-general" type="button">Logout</button></a>
+  <a href="/panel"><button class="btn btn-primary" type="button">Panel</button></a>
+  <a href="/logout"><button class="btn btn-primary" type="button">Logout</button></a>
 <%} else {%>
   <p>You're not logged in, please log in.</p>
   <div class="buttoncontainer">
-  <a href="/login"><button type="button" class="button-general">Login</button></a>
-  <a href="/register"><button type="button" class="button-general">Register</button></a>
+  <a href="/login"><button type="button" class="btn btn-primary">Login</button></a>
+  <a href="/register"><button type="button" class="btn btn-primary">Register</button></a>
   </div>
 <% } %>

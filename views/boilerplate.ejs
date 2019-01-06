@@ -1,48 +1,81 @@
 <!DOCTYPE html>
 
 <html>
-    
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-<title><%= title %> - Eight ICT</title>
- <link rel="stylesheet" href="/stylesheets/style.css">
- <link rel="icon" href="/img/favicon.ico">
- <script src="/scripts/script.js"></script>
- </head>
-<body>
-		<div class="navbar">
-			<ul class="navbar">
-				<li class="logo"><img src="/img/logo.jpg" class="logo" ></li>
-				<li class="isinavbar"><a href="/">Home</a></li>
-				<%if (locals.user) {%>
-				<li class="isinavbar"><a href="/logout">Logout</a></li>
-				<%} else {%>
-				<li class="isinavbar"><a href="/login">Login</a></li>
-				<li class="isinavbar"><a href="/register">Register</a></li>
-				<% } %>
-				<li class="button-drop"><button onclick="showDropdown()" class="button-transparent"><img src="/img/down-icon.png" class="down-icon"></button></li>
-				<div class="menu-drop" id="menu-drop">
-					<li class="isidropdown"><a href="/">Home</a></li>
-				<%if (locals.user) {%>
-					<li class="isidropdown"><a href="/logout">Logout</a></li>
-					<%} else {%>
-					<li class="isidropdown"><a href="/login">Login</a></li>
-					<li class="isidropdown"><a href="/register">Register</a></li>
-					<% } %>
-				</div>
-			</ul>
-		</div>
-		<div class="header">
-			<div class="textbox">
-				<p class="title"><a>8</a><b>ICT</b></p>
-				<p class="subtitle">Wahana SMA Negeri 8 Bandung</p>
+  <head>
+    <title><%= title %> - Eight ICT</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+	/>
+	<link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="icon" href="/img/favicon.ico" />
+    <!-- <script src="/scripts/script.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-sm navbar-dark sticky-top"
+      style="background-color: #0b121f"
+    >
+      <a class="navbar-brand"
+        ><img src="/img/logo.jpg" class="logo" style="height: 40px;"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <%if (locals.user) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+          <%} else {%>
+          <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+    <div class="jumbotron jumbotron-fluid mb-0 justify-content-center" style="background-image: url(/img/header.jpg); background-position: center; background-size: cover;">
+      <div class="container text-light">
+		<div class="card bg-dark">
+			<div class="card-body text-center">
+				<h1 class="card-title"><b style="color: #0099cc;">EIGHT</b><b style="color: #ff3300;">ICT</b></h1>
+				<p class="card-text">Wahana SMA Negeri 8 Bandung</p>
 			</div>
 		</div>
-		<div class="bodytext">
-			<%- include flash.ejs %>
-			<%- include(locals._template) %>
-		</div>
-	<div class="footer"><p>SMA Negeri 8 Bandung - 8ICT 2018</p></div>
-</body>
-</html> 
+      </div>
+    </div>
+    <div class="container-fluid p-5 text-center" style="min-height: 256px;">
+      <%- include flash.ejs %> <%- include(locals._template) %>
+    </div>
+    <div class="card-footer text-muted"><p>SMA Negeri 8 Bandung - 8ICT 2018</p></div>
+  </body>
+</html>
