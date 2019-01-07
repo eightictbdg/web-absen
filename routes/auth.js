@@ -13,7 +13,7 @@ function init(db) {
       res.redirect('/');
     }
     else {
-      res.render('boilerplate', { _template: 'login', title: 'Login', form: login_form.toHTML() });
+      res.render('boilerplate', {_template: 'login', title: 'Login', form: login_form});
     }
   });
 
@@ -34,11 +34,11 @@ function init(db) {
         }
         else {
           req.flash('error','Wrong username or password.')
-          res.render('boilerplate', { _template: 'login', title: 'Login', form: login_form.toHTML()});
+          res.render('boilerplate', {_template: 'login', title: 'Login', form: login_form});
         }
       },
       other: function (form) {
-        res.render('boilerplate', { _template: 'login', title: 'Login', form: form.toHTML() });
+        res.render('boilerplate', {_template: 'login', title: 'Login', form: form});
       }
     });
   }));

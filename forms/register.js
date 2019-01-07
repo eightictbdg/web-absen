@@ -5,39 +5,46 @@ const widgets = forms.widgets;
  
 var register_form = forms.create({
   division: fields.string({
+    inputOnly: true,
     widget: widgets.select(
       {
         classes: ['form-control','form-control-sm','dropdown']
       }
     ),
-    label: ' Division: '
+    label: ' Division'
   }),
   role: fields.string({
+    inputOnly: true,
     widget: widgets.select(
       {
         classes: ['form-control','form-control-sm','dropdown']
       }
     ),
-    label: ' Role: '
+    label: ' Role'
   }),
   name: fields.string({
-    label: 'Name: ',
+    inputOnly: true,
+    label: 'Name',
     required: validators.required('Please enter a name') 
   }),
   class: fields.string({
-    label: 'Class: ',
+    inputOnly: true,
+    label: 'Class',
     required: validators.required('Please enter a class name') 
   }),
   username: fields.string({
-    label: 'Username: ',
+    inputOnly: true,
+    label: 'Username',
     required: validators.required('Please enter a username') 
   }),
   password: fields.password({
-    label: 'Password: ',
+    inputOnly: true,
+    label: 'Password',
     required: validators.required('Please enter a password') 
   }),
   confirm_password:  fields.password({
-    label: 'Confirm Password: ',
+    inputOnly: true,
+    label: 'Confirm Password',
     required: validators.required('Please confirm your password'),
     validators: [validators.matchField('password')]
   })

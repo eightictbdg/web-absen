@@ -15,7 +15,7 @@ function init(db) {
       register_form.fields.role.choices = [];
       divisions.forEach(function (division) { register_form.fields.division.choices.push([division.id,division.name]) });
       roles.forEach(function (role) { register_form.fields.role.choices.push([role.id,role.name]) });
-      res.render('boilerplate', { _template: 'register', title: 'Register', form: register_form.toHTML() });
+      res.render('boilerplate', { _template: 'register', title: 'Register', form: register_form });
     }
     else {
       res.redirect('/');
@@ -46,11 +46,11 @@ function init(db) {
         }
         else {
           req.flash('error','Username already exists.')
-          res.render('boilerplate', { _template: 'register', title: 'Register', form: form.toHTML()});
+          res.render('boilerplate', { _template: 'register', title: 'Register', form: form});
         }
       },
       other: function (form) {
-        res.render('boilerplate', { _template: 'register', title: 'Register', form: form.toHTML()});
+        res.render('boilerplate', { _template: 'register', title: 'Register', form: form});
       }
     });
   }));

@@ -50,7 +50,7 @@
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-          <%if (locals.user) {%>
+          <%if (locals._logged_in) {%>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
           </li>
@@ -76,6 +76,10 @@
     <div class="container-fluid p-5 text-center" style="min-height: 256px;">
       <%- include flash.ejs %> <%- include(locals._template) %>
     </div>
-    <div class="card-footer text-muted"><p>SMA Negeri 8 Bandung - 8ICT 2018</p></div>
+    <footer class="page-footer text-muted">
+      <div class="container">
+        <p>SMA Negeri 8 Bandung - 8ICT 2018</p>
+      </div>
+    </footer>
   </body>
 </html>

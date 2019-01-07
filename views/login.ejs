@@ -2,7 +2,11 @@
 <div class="bar"></div> <br>
 <div class="border rounded bg-light">
 <form method="POST" class="form">
-  <%- form %>
+  <th><%- form.fields.username.labelHTML() %></th>
+  <th><%- form.fields.username.toHTML() %></th>
+  
+  <th><%- form.fields.password.labelHTML() %></th>
+  <th><%- form.fields.password.toHTML() %></th>
 </div> <br>
   <button type="submit" class="btn btn-success">Login</button>
 </form>
