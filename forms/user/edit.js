@@ -6,18 +6,21 @@ const widgets = forms.widgets;
 module.exports = function() {
   return forms.create({
     name: fields.string({
+      widget: widgets.text({ classes: ['form-control'] }),
       label: 'Name: ',
       hideError: true,
       inputOnly: true,
       required: validators.required('Please enter a name') 
     }),
     username: fields.string({
+      widget: widgets.text({ classes: ['form-control'] }),
       label: 'Username: ',
       hideError: true,
       inputOnly: true,
       required: validators.required('Please enter a username') 
     }),
     class: fields.string({
+      widget: widgets.text({ classes: ['form-control'] }),
       label: 'Class: ',
       hideError: true,
       inputOnly: true,
@@ -44,6 +47,7 @@ module.exports = function() {
       inputOnly: true
     }),
     password: fields.password({
+      widget: widgets.password({ classes: ['form-control'] }),
       label: 'Password: ',
       hideError: true,
       inputOnly: true

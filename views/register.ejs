@@ -1,21 +1,24 @@
 <h1 class="merah"><%= title %></h1>
-<div class="bar"></div> <br>
-<div class="border rounded bg-light">
+<div class="bar"></div>
+<br />
+
 <form method="POST" class="form">
-  <th><%- form.fields.name.labelHTML() %></th>
-  <th><%- form.fields.name.toHTML() %></th>
-  <th><%- form.fields.username.labelHTML() %></th>
-  <th><%- form.fields.username.toHTML() %></th>
-  <th><%- form.fields.class.labelHTML() %></th>
-  <th><%- form.fields.class.toHTML() %></th>
-  <th><%- form.fields.division.labelHTML() %></th>
-  <th><%- form.fields.division.toHTML() %></th>
-  <th><%- form.fields.role.labelHTML() %></th>
-  <th><%- form.fields.role.toHTML() %></th>
-  <th><%- form.fields.password.labelHTML() %></th>
-  <th><%- form.fields.password.toHTML() %></th>
-  <th><%- form.fields.confirm_password.labelHTML() %></th>
-  <th><%- form.fields.confirm_password.toHTML() %></th>
-</div> <br>
+  <div class="border rounded bg-light">
+    <div class="form-group"><%- form.fields.name.labelHTML() %>
+    <%- form.fields.name.toHTML() %></div>
+    <div class="form-group"><%- form.fields.username.labelHTML() %>
+    <%- form.fields.username.toHTML() %></div>
+    <div class="form-group"><%- form.fields.class.labelHTML() %>
+    <%- form.fields.class.toHTML() %></div>
+    <div class="form-group"><%- form.fields.division.labelHTML() %>
+    <%- form.fields.division.toHTML() %></div>
+    <div class="form-group"><%- form.fields.role.labelHTML() %>
+    <%- form.fields.role.toHTML() %></div>
+    <div class="form-group"><%- form.fields.password.labelHTML() %>
+    <%- form.fields.password.toHTML() %></div>
+    <div class="form-group"><%- form.fields.confirm_password.labelHTML() %>
+    <%- form.fields.confirm_password.toHTML() %></div>
+  </div>
+  <br />
   <button type="submit" class="btn btn-success">Submit</button>
 </form>

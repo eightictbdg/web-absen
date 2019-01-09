@@ -12,11 +12,13 @@ module.exports = function() {
       required: validators.required('Please enter a date') 
     }),
     passkey: fields.string({
+      widget: widgets.text({ classes: ['form-control'] }),
       hideError: true,
       inputOnly: true,
       required: validators.required('Please enter a passkey') 
     }),
     info: fields.string({
+      widget: widgets.text({ classes: ['form-control'] }),
       inputOnly: true
     })
   });
