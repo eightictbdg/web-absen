@@ -26,7 +26,9 @@ function init(db) {
       else if (role.name == 'Calon Anggota') {
         res.redirect('/panel/initiate');
       }
-      res.render('index', { title: 'Homepage', user: user, role:role});
+      else {
+        res.render('index', { title: 'Homepage', user: user, role:role});
+      }
     }
     else {
       res.redirect('/');
