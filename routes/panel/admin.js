@@ -24,6 +24,7 @@ function sub(router, db) {
     res.render('boilerplate', { _template: 'panel_admin', title: 'Admin Panel'});
   }));
 
+  require('./admin/config.js')(router,db);
   require('./admin/crud_schedule.js')(router,db);
   require('./admin/crud_division.js')(router,db);
   require('./admin/crud_role.js')(router,db);

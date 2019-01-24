@@ -1,0 +1,23 @@
+<h1 class="merah">Config</h1>
+<div class="bar"></div>
+<br>
+<div class="tablecontainer border bg-light">
+<table cellspacing="0" class="table bg-light">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <form method="POST" class="form">
+      <% keys(form.fields).forEach(function(field){ %>
+        <tr>
+          <td><%- form.fields[field].labelHTML() %></td>
+          <td><%- form.fields[field].toHTML() %></td>
+        </tr>
+      <% }) %>
+    </form>
+  </tbody>
+</table>
+</div>

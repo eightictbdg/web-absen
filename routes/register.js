@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler')
 function init(db) {
   const router = express.Router();
 
-  var register_form = require('../forms/register');
+  var register_form = require('../forms/register_dev');
 
   router.get('/register', async function register_get(req,res,next) {
     if (!req.session.logged_in) {
