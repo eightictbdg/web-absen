@@ -11,12 +11,16 @@
   </thead>
   <tbody>
     <form method="POST" class="form">
-      <% keys(form.fields).forEach(function(field){ %>
+      <% Object.keys(form.fields).forEach(function(field){ %>
         <tr>
           <td><%- form.fields[field].labelHTML() %></td>
           <td><%- form.fields[field].toHTML() %></td>
         </tr>
       <% }) %>
+      <tr>
+        <td>Submit</td>
+        <td><button type="submit" class="btn btn-primary">Submit</button></td>
+      </tr>
     </form>
   </tbody>
 </table>

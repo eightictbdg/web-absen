@@ -14,7 +14,10 @@ function init(db) {
     if (req.session.logged_in) {
       var user = await db.User.findByPk(req.session.user_id);
       var role = await user.getRole();
-      if (role.name == 'Administrator') {
+      if (role === null) {
+        res.redirect('/');
+      }
+      else if (role.name == 'Administrator') {
         res.redirect('/panel/admin');
       }
       else if (role.name == 'Pengurus') {
@@ -27,7 +30,7 @@ function init(db) {
         res.redirect('/panel/initiate');
       }
       else {
-        res.render('index', { title: 'Homepage', user: user, role:role});
+        res.redirect('/');
       }
     }
     else {

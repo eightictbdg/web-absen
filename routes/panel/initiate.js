@@ -17,7 +17,6 @@ function sub(router, db) {
     }
     else res.redirect('/');
   }));
-
   
   /* GET initiate panel page. */
   router.get('/panel/initiate', asyncHandler(async function admin_panel_get(req, res, next) {

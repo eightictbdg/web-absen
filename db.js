@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const crypto = require('crypto');
+const ConfigModel = require('./models/config');
 const UserModel = require('./models/user');
 const DivisionModel = require('./models/division');
 const ScheduleModel = require('./models/schedule');
@@ -18,6 +19,7 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+const Config = ConfigModel(sequelize, Sequelize);
 const User = UserModel(sequelize, Sequelize);
 const Division = DivisionModel(sequelize, Sequelize);
 const Schedule = ScheduleModel(sequelize, Sequelize);
@@ -35,13 +37,14 @@ sequelize.sync({ force: env == 'development' })
     console.log(`Database & tables synched!`);
     User.count().then( function(count) {
       if (count == 0) {
-        var db = {User, Division, Schedule, Role};
+        var db = {Config, User, Division, Schedule, Role};
         require('./models/_init')(db);
       }
     });
   });
 
 module.exports = {
+  Config,
   User,
   Division,
   Schedule,
