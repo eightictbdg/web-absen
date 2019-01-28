@@ -1,47 +1,60 @@
-<h1 class="merah">Schedules</h1>
-<div class="bar"></div>
-<br>
-<div class="tablecontainer border bg-light">
-<table cellspacing="0" class="table bg-light">
-  <thead class="thead-light">
-    <tr>
-      <th>ID</th>
-      <th>Date</th>
-      <th>Info</th>
-      <th>Passkey</th>
-      <th>#</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th>New</th>
-      <form method="POST" class="form">
-        <th><%- form.fields.date.toHTML() %></th>
-        <th><%- form.fields.info.toHTML() %></th>
-        <th><%- form.fields.passkey.toHTML() %></th>
-        <th><button type="submit" class="btn btn-primary">Add</button></th>
-      </form>
-    </tr>
-    <tr>
-      <th></th>
-      <th><%- form.fields.date.errorHTML() || '' %></th>
-      <th><%- form.fields.info.errorHTML() || '' %></th>
-      <th><%- form.fields.passkey.errorHTML() || '' %></th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <% schedules.forEach(function(schedule){ %>
-      <tr>
-        <td><a href="schedule/<%= schedule.id %>"><%= schedule.id %></td>
-        <td><%= schedule.date %></td>
-        <td><%= schedule.info %></td>
-        <td><%= schedule.passkey %></td>
-        <td>
-          <a href="schedule/<%= schedule.id %>/update">Edit</a>
-          <a href="schedule/<%= schedule.id %>/delete">Delete</a>
-        </td>
-      </tr>
-    <% }) %>
-  </tbody>
-</table>
+<div class="row justify-content-center">
+  <div class="col-md-2 col-sm-4  mb-4">
+      <div class="list-group">
+          <a href="/panel/admin/config" class="list-group-item list-group-item-action">Configuration</a>
+          <a href="/panel/admin/schedule" class="list-group-item list-group-item-action active">Schedule</a>
+          <a href="/panel/admin/division" class="list-group-item list-group-item-action">Division</a>
+          <a href="/panel/admin/role" class="list-group-item list-group-item-action">Role</a>
+          <a href="/panel/admin/user" class="list-group-item list-group-item-action">User</a>
+      </div>
+  </div>
+  <div class="col-md-9 border text-center col-sm-4 px-0 pt-2">
+    <h1 class="merah">Schedules</h1>
+    <div class="bar"></div>
+    <br>
+    <div class="tablecontainer border bg-light">
+      <table cellspacing="0" class="table bg-light">
+        <thead class="thead-light">
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Info</th>
+            <th>Passkey</th>
+            <th>#</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>New</th>
+            <form method="POST" class="form">
+              <th><%- form.fields.date.toHTML() %></th>
+              <th><%- form.fields.info.toHTML() %></th>
+              <th><%- form.fields.passkey.toHTML() %></th>
+              <th><button type="submit" class="btn btn-primary">Add</button></th>
+            </form>
+          </tr>
+          <tr>
+            <th></th>
+            <th><%- form.fields.date.errorHTML() || '' %></th>
+            <th><%- form.fields.info.errorHTML() || '' %></th>
+            <th><%- form.fields.passkey.errorHTML() || '' %></th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% schedules.forEach(function(schedule){ %>
+            <tr>
+              <td><a href="schedule/<%= schedule.id %>"><%= schedule.id %></td>
+              <td><%= schedule.date %></td>
+              <td><%= schedule.info %></td>
+              <td><%= schedule.passkey %></td>
+              <td>
+                <a href="schedule/<%= schedule.id %>/update">Edit</a>
+                <a href="schedule/<%= schedule.id %>/delete">Delete</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      </div>
+  </div>    
 </div>
