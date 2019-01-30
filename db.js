@@ -19,11 +19,11 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
-const Config = ConfigModel(sequelize, Sequelize);
-const User = UserModel(sequelize, Sequelize);
-const Division = DivisionModel(sequelize, Sequelize);
-const Schedule = ScheduleModel(sequelize, Sequelize);
-const Role = RoleModel(sequelize, Sequelize);
+var Config = ConfigModel(sequelize, Sequelize);
+var User = UserModel(sequelize, Sequelize);
+var Division = DivisionModel(sequelize, Sequelize);
+var Schedule = ScheduleModel(sequelize, Sequelize);
+var Role = RoleModel(sequelize, Sequelize);
 
 Schedule.belongsToMany(User, {through: 'UserSchedule'});
 User.belongsToMany(Schedule, {through: 'UserSchedule'});
@@ -33,20 +33,34 @@ User.belongsTo(Role);
 Role.hasMany(User, {as: 'User'});
 
 sequelize.sync({ force: env == 'development' })
-  .then(function() {
+  .then(async function() {
     console.log(`Database & tables synched!`);
-    User.count().then( function(count) {
-      if (count == 0) {
-        var db = {Config, User, Division, Schedule, Role};
-        require('./models/_init')(db);
-      }
-    });
-  });
+    var db = {
+      Config,
+      User,
+      Division,
+      Schedule,
+      Role
+    }
 
-module.exports = {
-  Config,
-  User,
-  Division,
-  Schedule,
-  Role
-}
+    // Role
+    var Admin = await require('./instances/admin')(db);
+    var Manager = await require('./instances/manager')(db);
+    var Member = await require('./instances/member')(db);
+    var Initiate = await require('./instances/initiate')(db);
+
+    // Config
+    var DefaultRole = await require('./instances/config/default_role')(db);
+
+    var instances = {
+      Admin,
+      Manager,
+      Member,
+      Initiate,
+      DefaultRole
+    }
+
+    db.instances = instances;
+
+    module.exports = db
+  });
