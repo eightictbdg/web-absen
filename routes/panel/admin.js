@@ -9,7 +9,7 @@ function sub(router, db) {
       var user = await db.User.findByPk(req.session.user_id);
       if (!user) res.redirect('/logout')
       var role = await user.getRole();
-      if (role.name == 'Administrator') {
+      if (role.name == (await db.instances.roles.Admin.get(db)).name) {
         res.locals.title = 'Admin Panel'
         next();
       }
@@ -21,7 +21,7 @@ function sub(router, db) {
   
   /* GET panel page. */
   router.get('/panel/admin', asyncHandler(async function admin_panel_get(req, res, next) {
-    res.render('boilerplate', { _template: 'panel_admin', title: 'Admin Panel'});
+    res.render('boilerplate', {_template: 'admin/panel'});
   }));
 
   require('./admin/config.js')(router,db);

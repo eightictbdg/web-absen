@@ -11,7 +11,7 @@ function sub(router, db) {
   /* GET division table page */
   router.get('/panel/admin/division', asyncHandler(async function division_table_get(req, res, next) {
     var divisions = await db.Division.findAll();
-    res.render('boilerplate', { _template: 'division/table', divisions: divisions, form: create_division_form });
+    res.render('boilerplate', { _template: 'admin/division/table', divisions: divisions, form: create_division_form });
   }));
 
   /* POST create division page */
@@ -26,7 +26,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var divisions = await db.Division.findAll();
-        res.render('boilerplate', { _template: 'division/table', divisions: divisions, form: form });
+        res.render('boilerplate', { _template: 'admin/division/table', divisions: divisions, form: form });
       }
     });
   }));
@@ -36,7 +36,7 @@ function sub(router, db) {
     var division = await db.Division.findByPk(req.params.divisionId);
     if (division) {
       division.users = await division.getUser();
-      res.render('boilerplate', { _template: 'division/read', division: division });
+      res.render('boilerplate', { _template: 'admin/division/read', division: division });
     }
     else res.sendStatus(404);
   }));
@@ -46,7 +46,7 @@ function sub(router, db) {
     var division = await db.Division.findByPk(req.params.divisionId);
     if (division) {
       edit_division_form.fields.name.value = division.name;
-      res.render('boilerplate', {_template: 'division/edit', division: division, form: edit_division_form });
+      res.render('boilerplate', {_template: 'admin/division/edit', division: division, form: edit_division_form });
     }
     else res.sendStatus(404);
   }));
@@ -66,7 +66,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var division = await db.Division.findByPk(req.params.divisionId);
-        if (division) res.render('boilerplate', {_template: 'division/edit', division: division, form: form });
+        if (division) res.render('boilerplate', {_template: 'admin/division/edit', division: division, form: form });
         else res.sendStatus(404);
       }
     });

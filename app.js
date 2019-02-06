@@ -4,9 +4,12 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const config  = require('./config')
 
-const db = require('./db');
+const db = require('./db').db;
+const db_sync = require('./db').sync;
 
 const env = process.env.NODE_ENV || 'development';
+
+db_sync();
 
 // init Express
 const app = express();
@@ -20,7 +23,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: new FileStore,
-  cookie: { secure: false }
+  cookie: { secure: false },
+  path: config[env].session_path
 }));
 
 app.use(flash());

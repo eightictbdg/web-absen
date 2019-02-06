@@ -12,13 +12,15 @@ function sub(router, db) {
       var user = await db.User.findByPk(req.session.user_id);
       if (!user) res.redirect('/logout')
       var role = await user.getRole();
-      if (role.name == 'Anggota') { next(); }
+      if (role.name == (await db.instances.roles.Member.get(db)).name) {
+        res.locals.title = 'Admin Panel'
+        next();
+      }
       else res.redirect('/');
     }
     else res.redirect('/');
   }));
 
-  
   /* GET member panel page. */
   router.get('/panel/member', asyncHandler(async function admin_panel_get(req, res, next) {
     var date = datetime.create();
@@ -28,11 +30,11 @@ function sub(router, db) {
       var user = await db.User.findByPk(req.session.user_id);
       user.schedules = await user.hasSchedules();
       if (!(await user.hasSchedules(schedules))) {
-        res.render('boilerplate', { _template: 'panel_member', title: 'Member Panel', form: attend_form, schedules: schedules });
+        res.render('boilerplate', { _template: 'member/panel', form: attend_form, schedules: schedules });
       }
-      else res.render('boilerplate', { _template: 'panel_member', title: 'Member Panel', message: "There's no unattended schedule for today" });
+      else res.render('boilerplate', { _template: 'member/panel', message: "There's no unattended schedule for today" });
     }
-    else res.render('boilerplate', { _template: 'panel_member', title: 'Member Panel', message: "There's no schedule for today" });
+    else res.render('boilerplate', { _template: 'member/panel', message: "There's no schedule for today" });
   }));
 
   /* POST member panel page. */  
@@ -55,7 +57,7 @@ function sub(router, db) {
         res.redirect('/panel/member');
       },
       other: function (form) {
-        res.render('boilerplate', { _template: 'panel_member', title: 'Member Panel', form: form });
+        res.render('boilerplate', { _template: 'member/panel', form: form });
       }
     });
   }));

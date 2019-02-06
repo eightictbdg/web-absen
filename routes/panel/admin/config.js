@@ -12,7 +12,7 @@ function sub(router, db) {
     config_form.fields.default_role.choices = [[0,'-']];
     roles.forEach(function (role) { config_form.fields.default_role.choices.push([role.id,role.name]) });
     config_form.fields.default_role.value = default_role.value;
-    res.render('boilerplate', { _template: 'config/table', form: config_form });
+    res.render('boilerplate', { _template: 'admin/config/table', form: config_form });
   }));
 
   /* POST create config page */
@@ -31,7 +31,7 @@ function sub(router, db) {
         config_form.fields.default_role.choices = [[0,'-']];
         roles.forEach(function (role) { config_form.fields.default_role.choices.push([role.id,role.name]) });
         config_form.fields.default_role.value = default_role.value;
-        res.render('boilerplate', { _template: 'config/table', form: form });
+        res.render('boilerplate', { _template: 'admin/config/table', form: form });
       }
     });
   }));

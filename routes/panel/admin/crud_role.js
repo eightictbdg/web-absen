@@ -11,7 +11,7 @@ function sub(router, db) {
   /* GET role table page */
   router.get('/panel/admin/role', asyncHandler(async function role_table_get(req, res, next) {
     var roles = await db.Role.findAll();
-    res.render('boilerplate', { _template:'role/table', roles: roles, form: create_role_form });
+    res.render('boilerplate', { _template:'admin/role/table', roles: roles, form: create_role_form });
   }));
 
   /* POST create role page */
@@ -25,7 +25,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var roles = await db.Role.findAll();
-        res.render('boilerplate', { _template:'role/table', roles: roles, form: form });
+        res.render('boilerplate', { _template:'admin/role/table', roles: roles, form: form });
       }
     });
   }));
@@ -35,7 +35,7 @@ function sub(router, db) {
     var role = await db.Role.findByPk(req.params.roleId);
     if (role) {
       role.users = await role.getUser();
-      res.render('boilerplate', { _template: 'role/read', role: role });
+      res.render('boilerplate', { _template: 'admin/role/read', role: role });
     }
     else res.sendStatus(404);
   }));
@@ -45,7 +45,7 @@ function sub(router, db) {
     var role = await db.Role.findByPk(req.params.roleId);
     if (role) {
       edit_role_form.fields.name.value = role.name;
-      res.render('boilerplate', {_template:'role/edit', role: role, form: edit_role_form });
+      res.render('boilerplate', {_template:'admin/role/edit', role: role, form: edit_role_form });
     }
     else res.sendStatus(404);
   }));
@@ -65,7 +65,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var role = await db.Role.findByPk(req.params.roleId);
-        if (role) res.render('boilerplate', {_template:'role/edit', role: role, form: form });
+        if (role) res.render('boilerplate', {_template:'admin/role/edit', role: role, form: form });
         else res.sendStatus(404);
       }
     });

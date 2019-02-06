@@ -10,9 +10,5 @@ module.exports = (sequelize, type) => {
       unique: true,
       allowNull: false
     }
-    alias: {
-      type: type.STRING,
-      allowNull: false
-    }
   })
 }

@@ -20,9 +20,6 @@ module.exports = (sequelize, type) => {
     },
     class: {
       type: type.STRING
-    },
-    is_approved: {
-      type: type.INTEGER
     }
   })
 }

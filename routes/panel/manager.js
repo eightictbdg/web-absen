@@ -9,7 +9,7 @@ function sub(router, db) {
       var user = await db.User.findByPk(req.session.user_id);
       if (!user) res.redirect('/logout')
       var role = await user.getRole();
-      if (role.name == 'Pengurus') {
+      if (role.name == (await db.instances.roles.Manager.get(db)).name) {
         res.locals.title = 'Manager Panel'
         next();
       }
@@ -21,7 +21,7 @@ function sub(router, db) {
   
   /* GET panel page. */
   router.get('/panel/manager', asyncHandler(async function manager_panel_get(req, res, next) {
-    res.render('boilerplate', { _template: 'panel_manager', title: 'Manager Panel'});
+    res.render('boilerplate', {_template: 'manager/panel'});
   }));
 
   require('./manager/crud_schedule.js')(router,db);

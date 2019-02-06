@@ -7,12 +7,15 @@ function sub(router, db) {
   var attend_form = require('../../forms/attend');
 
   // Check if user has the right role
-  router.use('/panel/initiate', asyncHandler(async function isMemberMiddleware(req, res, next) {
+  router.use('/panel/initiate', asyncHandler(async function isInitiateMiddleware(req, res, next) {
     if (req.session.logged_in) {
       var user = await db.User.findByPk(req.session.user_id);
       if (!user) res.redirect('/logout')
       var role = await user.getRole();
-      if (role.name == 'Calon Anggota') { next(); }
+      if (role.name == (await db.instances.roles.Initiate.get(db)).name) {
+        res.locals.title = 'Initiate Panel'
+        next();
+      }
       else res.redirect('/');
     }
     else res.redirect('/');
@@ -27,11 +30,11 @@ function sub(router, db) {
       var user = await db.User.findByPk(req.session.user_id);
       user.schedules = await user.hasSchedules();
       if (!(await user.hasSchedules(schedules))) {
-        res.render('boilerplate', { _template: 'panel_member', title: 'Initiate Panel', form: attend_form, schedules: schedules });
+        res.render('boilerplate', { _template: 'initiate/panel', form: attend_form, schedules: schedules });
       }
-      else res.render('boilerplate', { _template: 'panel_member', title: 'Initiate Panel', message: "There's no unattended schedule for today" });
+      else res.render('boilerplate', { _template: 'initiate/panel', message: "There's no unattended schedule for today" });
     }
-    else res.render('boilerplate', { _template: 'panel_member', title: 'Initiate Panel', message: "There's no schedule for today" });
+    else res.render('boilerplate', { _template: 'initiate/panel', message: "There's no schedule for today" });
   }));
 
   /* POST initiate panel page. */  
@@ -54,7 +57,7 @@ function sub(router, db) {
         res.redirect('/panel/initiate');
       },
       other: function (form) {
-        res.render('boilerplate', { _template: 'panel_member', title: 'Initiate Panel', form: form });
+        res.render('boilerplate', { _template: 'initiate/panel', form: form });
       }
     });
   }));
