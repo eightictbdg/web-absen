@@ -49,15 +49,15 @@
 
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/"><i class="fa fa-home d-sm-none"></i> Home</a></li>
           <%if (locals._logged_in) {%>
           <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link" href="/logout"><i class="fa fa-sign-out d-sm-none"></i> Logout</a>
           </li>
           <%} else {%>
-          <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="/login"><i class="fa fa-sign-in d-sm-none"></i> Login</a></li>
           <li class="nav-item">
-            <a class="nav-link" href="/register">Register</a>
+            <a class="nav-link" href="/register"><i class="fa fa-pencil-square-o d-sm-none"></i> Register</a>
           </li>
           <% } %>
         </ul>
