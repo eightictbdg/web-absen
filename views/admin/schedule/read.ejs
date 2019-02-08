@@ -7,7 +7,7 @@
     <li class="list-group-item">Info: <%= schedule.info %></li>
     <li class="list-group-item">Passkey: <%= schedule.passkey %></li>
     <li class="list-group-item">
-      Who attended: <br>
+      Attendant: <br>
       <div class="list-group">
       <% users.forEach(function(user){ %>
         <a class="list-group-item list-group-item-action" href="/panel/admin/user/<%= user.id %>"><%= user.name %></a>
