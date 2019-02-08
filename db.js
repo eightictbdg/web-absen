@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const crypto = require('crypto');
-const fs = require('fs')
+const fse = require('fs-extra')
 const ConfigModel = require('./models/config');
 const UserModel = require('./models/user');
 const DivisionModel = require('./models/division');
@@ -12,8 +12,8 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('./config.js')[env];
 
 if (process.env.DATA_DIR) {
-  fs.existsSync(process.env.DATA_DIR + '/database') || fs.mkdirSync(process.env.DATA_DIR + '/database')
-  fs.existsSync(process.env.DATA_DIR + '/sessions') || fs.mkdirSync(process.env.DATA_DIR + '/sessions')
+  fse.ensureDirSync(process.env.DATA_DIR + '/database');
+  fse.ensureDirSync(process.env.DATA_DIR + '/sessions');
 }
 
 var sequelize = new Sequelize(config.database, config.username, config.password, config);
