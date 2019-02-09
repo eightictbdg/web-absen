@@ -17,7 +17,7 @@ function sub(router, db) {
     create_user_form.fields.role.choices = [];
     divisions.forEach(function (division) { create_user_form.fields.division.choices.push([division.id,division.name]) });
     roles.forEach(function (role) { create_user_form.fields.role.choices.push([role.id,role.name]) });
-    res.render('boilerplate', { _template: 'admin/user/table', users: users, form: create_user_form });
+    res.render('boilerplate', { _template: 'admin/user/table', users: users, form: create_user_form, currentUrl: req.url });
   }));
 
   /* POST create user page */
@@ -43,7 +43,7 @@ function sub(router, db) {
         form.fields.role.choices = [];
         divisions.forEach(function (division) { form.fields.division.choices.push([division.id,division.name]) });
         roles.forEach(function (role) { form.fields.role.choices.push([role.id,role.name]) });
-        res.render('boilerplate', { _template: 'admin/user/table', users: users, form: form });
+        res.render('boilerplate', { _template: 'admin/user/table', users: users, form: form, currentUrl: req.url });
       }
     });
   }));

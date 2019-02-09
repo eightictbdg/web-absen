@@ -11,7 +11,7 @@ function sub(router, db) {
   /* GET division table page */
   router.get('/panel/admin/division', asyncHandler(async function division_table_get(req, res, next) {
     var divisions = await db.Division.findAll();
-    res.render('boilerplate', { _template: 'admin/division/table', divisions: divisions, form: create_division_form });
+    res.render('boilerplate', { _template: 'admin/division/table', divisions: divisions, form: create_division_form, currentUrl: req.url });
   }));
 
   /* POST create division page */
@@ -26,7 +26,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var divisions = await db.Division.findAll();
-        res.render('boilerplate', { _template: 'admin/division/table', divisions: divisions, form: form });
+        res.render('boilerplate', { _template: 'admin/division/table', divisions: divisions, form: form, currentUrl: req.url });
       }
     });
   }));

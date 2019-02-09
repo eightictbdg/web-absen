@@ -11,7 +11,7 @@ function sub(router, db) {
   /* GET schedule table page */
   router.get('/panel/admin/schedule', asyncHandler(async function schedule_table_get(req, res, next) {
     var schedules = await db.Schedule.findAll();
-    res.render('boilerplate', { _template: 'admin/schedule/table', schedules: schedules, form: create_schedule_form });
+    res.render('boilerplate', { _template: 'admin/schedule/table', schedules: schedules, form: create_schedule_form, currentUrl: req.url });
   }));
 
   /* POST create schedule page */
@@ -34,7 +34,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var schedules = await db.Schedule.findAll();
-        res.render('boilerplate', { _template: 'admin/schedule/table', schedules: schedules, form: form });
+        res.render('boilerplate', { _template: 'admin/schedule/table', schedules: schedules, form: form, currentUrl: req.url });
       }
     });
   }));

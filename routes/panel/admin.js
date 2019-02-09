@@ -10,7 +10,8 @@ function sub(router, db) {
       if (!user) res.redirect('/logout')
       var role = await user.getRole();
       if (role.name == (await db.instances.roles.Admin.get(db)).name) {
-        res.locals.title = 'Admin Panel'
+        res.locals.title = 'Admin Panel',
+        res.locals.userRole = role.name
         next();
       }
       else res.redirect('/');
@@ -21,7 +22,7 @@ function sub(router, db) {
   
   /* GET panel page. */
   router.get('/panel/admin', asyncHandler(async function admin_panel_get(req, res, next) {
-    res.render('boilerplate', {_template: 'admin/panel'});
+    res.render('boilerplate', {_template: 'admin/panel', current: req.url});
   }));
 
   require('./admin/config.js')(router,db);
