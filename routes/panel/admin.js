@@ -24,11 +24,13 @@ function sub(router, db) {
     res.render('boilerplate', {_template: 'admin/panel'});
   }));
 
-  require('./admin/config.js')(router,db);
+  require('./admin/ru_config.js')(router,db);
   require('./admin/crud_schedule.js')(router,db);
   require('./admin/crud_division.js')(router,db);
   require('./admin/crud_role.js')(router,db);
   require('./admin/crud_user.js')(router,db);
+  require('./admin/crud_user.js')(router,db);
+  require('./admin/r_csv.js')(router,db);
 }
 
 module.exports = sub;

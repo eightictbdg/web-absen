@@ -4,8 +4,8 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const config  = require('./config')
 
-const db = require('./db').db;
-const db_sync = require('./db').sync;
+const db = require('./models').db;
+const db_sync = require('./models').sync;
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -23,7 +23,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: new FileStore,
-  cookie: { secure: false },
+  cookie: {secure: false},
   path: config[env].session_path
 }));
 

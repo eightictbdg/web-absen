@@ -1,24 +1,23 @@
 const Sequelize = require('sequelize');
 const crypto = require('crypto');
-const fse = require('fs-extra')
-const ConfigModel = require('./models/config');
-const UserModel = require('./models/user');
-const DivisionModel = require('./models/division');
-const ScheduleModel = require('./models/schedule');
-const RoleModel = require('./models/role');
+const fse = require('fs-extra');
+
+const ConfigModel = require('./config');
+const UserModel = require('./user');
+const DivisionModel = require('./division');
+const ScheduleModel = require('./schedule');
+const RoleModel = require('./role');
 
 const env = process.env.NODE_ENV || 'development';
 
-const config = require('./config.js')[env];
+const config = require('../config.js')[env];
 
-if (process.env.DATA_DIR) {
-  fse.ensureDirSync(process.env.DATA_DIR + '/database');
-  fse.ensureDirSync(process.env.DATA_DIR + '/sessions');
-}
+var database_dir = process.env.DATA_DIR ? process.env.DATA_DIR + '/database' : './database';
+
+fse.ensureDirSync(database_dir);
 
 var sequelize = new Sequelize(config.database, config.username, config.password, config);
-sequelize
-  .authenticate()
+sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
   })
