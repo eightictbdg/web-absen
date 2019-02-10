@@ -272,15 +272,15 @@ input[type="text"]:focus, input[type="password"]:focus {
 #register {
   grid-column: 2;
 }
-
+*/
 .buttoncontainer {
   display: inline;
 }
 
-.buttoncontainer button {
+.buttoncontainer a {
   margin: 5px 10px;
 }
-*/
+
 .error_msg {
   background-color: #facbbf;
   border: 1px solid #ff2929;
