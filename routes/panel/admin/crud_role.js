@@ -11,7 +11,7 @@ function sub(router, db) {
   /* GET role table page */
   router.get('/panel/admin/role', asyncHandler(async function role_table_get(req, res, next) {
     var roles = await db.Role.findAll();
-    res.render('boilerplate', { _template:'admin/role/table', roles: roles, form: create_role_form });
+    res.render('boilerplate', { _template:'admin/role/table', roles: roles, form: create_role_form, currentUrl: req.url });
   }));
 
   /* POST create role page */
@@ -25,7 +25,7 @@ function sub(router, db) {
       },
       other: async function (form) {
         var roles = await db.Role.findAll();
-        res.render('boilerplate', { _template:'admin/role/table', roles: roles, form: form });
+        res.render('boilerplate', { _template:'admin/role/table', roles: roles, form: form, currentUrl: req.url });
       }
     });
   }));
