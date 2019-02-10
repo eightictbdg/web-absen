@@ -22,7 +22,7 @@ function sub(router, db) {
   
   /* GET panel page. */
   router.get('/panel/admin', asyncHandler(async function admin_panel_get(req, res, next) {
-    res.render('boilerplate', {_template: 'admin/panel', current: req.url});
+    res.render('boilerplate', {_template: 'admin/panel', currentUrl: req.url});
   }));
 
   require('./admin/ru_config.js')(router,db);

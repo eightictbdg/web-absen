@@ -3,8 +3,9 @@
     <a href="/panel/admin/config" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/admin/config') {%>active<%}%>"><i class="fa fa-cogs"></i> Configuration</a>
     <a href="/panel/admin/schedule" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/admin/schedule') {%>active<%}%>"><i class="fa fa-calendar"></i> Schedule</a>
     <a href="/panel/admin/division" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/admin/division') {%>active<%}%>"><i class="fa fa-users"></i> Division</a>
-    <a href="/panel/admin/role" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/admin/role') {%>active<%}%>"><i class="fa fa-id-card-o"></i> Role</a>
+    <a href="/panel/admin/role" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/admin/role') {%>active<%}%>"><i class="fa fa-id-card"></i> Role</a>
     <a href="/panel/admin/user" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/admin/user') {%>active<%}%>"><i class="fa fa-user"></i> User</a>
+    <a href="/panel/admin/csv" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/admin/csv') {%>active<%}%>"><i class="fas fa-file-csv"></i> Exports</a>
 <%} else if (userRole === 'Pengurus') {%>
     <a href="/panel/manager/schedule" class="list-group-item list-group-item-action <%if (currentUrl==='/panel/manager/schedule') {%>active<%}%>"><i class="fa fa-calendar"></i> Schedule</a>
 <%}%>

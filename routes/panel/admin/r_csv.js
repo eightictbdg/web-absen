@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 
 function sub(router, db) {
   router.get('/panel/admin/csv', function(req, res, next) {
-    res.render('boilerplate', {_template: 'admin/csv'});
+    res.render('boilerplate', {_template: 'admin/csv', currentUrl : req.url});
   })
 
   router.get('/panel/admin/csv/configs.csv', asyncHandler(async function(req, res, next) {
