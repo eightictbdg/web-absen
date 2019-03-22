@@ -7,6 +7,7 @@ const UserModel = require('./user');
 const DivisionModel = require('./division');
 const ScheduleModel = require('./schedule');
 const RoleModel = require('./role');
+const PermissionModel = require('./permission');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -30,6 +31,11 @@ var User = UserModel(sequelize, Sequelize);
 var Division = DivisionModel(sequelize, Sequelize);
 var Schedule = ScheduleModel(sequelize, Sequelize);
 var Role = RoleModel(sequelize, Sequelize);
+var Permission = PermissionModel(sequelize, Sequelize);
+
+var RolePermission = sequelize.define('RolePermission', {
+    perm: Sequelize.STRING
+})
 
 // Relations
 Schedule.belongsToMany(User, {through: 'UserSchedule'});
@@ -38,33 +44,40 @@ User.belongsTo(Division);
 Division.hasMany(User, {as: 'User'});
 User.belongsTo(Role);
 Role.hasMany(User, {as: 'User'});
+Role.belongsToMany(Permission, {through: RolePermission});
+Permission.belongsToMany(Role, {through: RolePermission});
 
 // Instances
 var roles = require('./instances/roles');
 var divisions = require('./instances/divisions');
 var configs = require('./instances/configs');
+var permissions = require('./instances/permissions');
 
 var db = {
   Config,
   User,
   Division,
   Schedule,
-  Role
+  Role,
+  Permission
 }
 
 db.instances = {
   roles,
   divisions,
-  configs
+  configs,
+  permissions
 }
 
 async function sync() {
   await sequelize.sync({ force: env == 'development' });
   console.log(`Database & tables synched!`);
 
-  for (var model in db.instances) {
-    for (var instance in db.instances[model]){
-      await db.instances[model][instance].init(db);
+  for (var model_key in db.instances) {
+    var model = db.instances[model_key];
+    for (var instance_key in model){
+      var instance = model[instance_key];
+      await instance.init(db);
     }
   }
 }

@@ -1,0 +1,25 @@
+<h1 class="merah">User</h1>
+<div class="bar"></div>
+<br>
+<ul class="list-group">
+<li class="list-group-item active"><%= user.name %></li>
+<li class="list-group-item">ID: <%= user.id %></li>
+<li class="list-group-item">Username: <%= user.username %></li>
+<li class="list-group-item">Class: <%= user.class %></li>
+<li class="list-group-item">Division: <% if (user.division) {%>
+  <a href="/panel/division/<%= user.division.id %>/read"><%= user.division.name %></a>
+<%}%>
+</li>
+<li class="list-group-item">Role: <% if (user.role) {%>
+  <a href="/panel/role/<%= user.role.id %>/read"><%= user.role.name %></a>
+<%}%>
+</li>
+<li class="list-group-item">Password Hash: <br> <code><%= user.password %></code></li>
+</ul>
+<br>
+<%if (rolePerms.find(obj => obj.name === 'panel_user' && obj.RolePermission.perm.includes('u'))) {%>
+  <a href="update"><button class="btn btn-success"><i class="fa fa-pencil-alt"></i> Edit</button></a>
+<%}%>
+<%if (rolePerms.find(obj => obj.name === 'panel_user' && obj.RolePermission.perm.includes('d'))) {%>
+  <a href="delete"><button class="btn btn-danger"><i class="fa fa-trash-alt"></i> Delete</button></a>
+<%}%>

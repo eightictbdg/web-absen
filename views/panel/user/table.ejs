@@ -1,0 +1,67 @@
+<h1 class="merah">Users</h1>
+<div class="bar"></div>
+<br>
+<div class="tablecontainer border bg-light">
+  <table cellspacing="0" class="table bg-light">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Class</th>
+        <th>Division</th>
+        <th>Role</th>
+        <th>Password</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <% if (form) {%>
+        <tr>
+          <th>New</th>
+          <form method="POST" class="form">
+            <th><%- form.fields.name.toHTML() %></th>
+            <th><%- form.fields.username.toHTML() %></th>
+            <th><%- form.fields.class.toHTML() %></th>
+            <th><%- form.fields.division.toHTML() %></th>
+            <th><%- form.fields.role.toHTML() %></th>
+            <th><%- form.fields.password.toHTML() %></th>
+            <th><button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button></th>
+          </form>
+        </tr>
+        <% if (form.isValid) {%>
+          <tr>
+            <th></th>
+            <th><%- form.fields.name.errorHTML() || '' %></th>
+            <th><%- form.fields.username.errorHTML() || '' %></th>
+            <th><%- form.fields.class.errorHTML() || '' %></th>
+            <th><%- form.fields.division.errorHTML() || '' %></th>
+            <th><%- form.fields.role.errorHTML() || '' %></th>
+            <th><%- form.fields.password.errorHTML() || '' %></th>
+          </tr>
+        <%}%>
+      <%}%>
+    </tfoot>
+    <tbody>
+      <% users.forEach(function(user){ %>
+        <tr>
+          <td><a href="user/<%= user.id %>/read"><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.username %></td>
+          <td><%= user.class %></td>
+          <td><%= user.division ? user.division.name  : ''%></td>
+          <td><%= user.role ? user.role.name : ''%></td>
+          <td>***********</td>
+          <td>
+            <%if (rolePerms.find(obj => obj.name === 'panel_user' && obj.RolePermission.perm.includes('u'))) {%>
+              <a href="user/<%= user.id %>/update">Edit</a>
+            <%}%>
+            <%if (rolePerms.find(obj => obj.name === 'panel_user' && obj.RolePermission.perm.includes('d'))) {%>
+              <a href="user/<%= user.id %>/delete">Delete</a>
+            <%}%>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

@@ -1,35 +1,48 @@
 const crypto = require('crypto');
 
-const name = 'Administrator';
+module.exports.name = 'Administrator';
 
-async function init(db) {
+module.exports.callback = async function(db) {
+  var Role = db.Role;
   var User = db.User;
-  var Role = db.Role;
+  var role = await Role.findOne({where: {name: module.exports.name}});
+  
+  var permission = require('../permissions');
 
-  var query_result = await Role.findOrCreate({where: {name: name}});
-  var role_not_exist = query_result[1];
-  var role = query_result[0];
+  var permRole = await permission.Panel.Role.init(db);
+  var permDivision = await permission.Panel.Division.init(db);
+  var permUser = await permission.Panel.User.init(db);
+  var permSchedule = await permission.Panel.Schedule.init(db);
+  var permConfig = await permission.Panel.Config.init(db);
+  var permPermission = await permission.Panel.Permission.init(db);
+  var permCSV = await permission.Panel.CSV.init(db);
 
-  if (role_not_exist) {
-    // defining default user 'admin'
-    var admin = await User.create({
-      name: 'Administrator',
-      username: 'admin',
-      password: crypto.createHash('sha512').update('admin').digest('hex'),
-      roleId: role.id
-    });
-  }
+  permRole.RolePermission = {perm: 'crud'};
+  permDivision.RolePermission = {perm: 'crud'};
+  permUser.RolePermission = {perm: 'crud'};
+  permSchedule.RolePermission = {perm: 'crud'};
+  permConfig.RolePermission = {perm: 'ru'};
+  permPermission.RolePermission = {perm: 'r'};
+  permCSV.RolePermission = {perm: 'r'};
+  
+  var permission_list = [
+    // CRUD PANEL
+    permRole,
+    permDivision,
+    permUser,
+    permSchedule,
+    permConfig,
+    permPermission,
+    permCSV
+  ];
+  
+  await role.setPermissions(permission_list, {through: {perm: 'crud'}});
 
-  return role;
-}
-
-async function get(db){
-  var Role = db.Role;
-  role = await Role.findOne({where: {name: name}});
-  return role;
-}
-
-module.exports = {
-  init,
-  get
+  // defining default user 'admin'
+  var admin = await User.create({
+    name: 'Administrator',
+    username: 'admin',
+    password: crypto.createHash('sha512').update('admin').digest('hex'),
+    roleId: role.id
+  });
 }

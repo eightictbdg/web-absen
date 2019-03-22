@@ -1,0 +1,48 @@
+<h1 class="merah">Divisions</h1>
+<div class="bar"></div>
+<br>
+<div class="tablecontainer border bg-light">
+  <table cellspacing="0" class="table bg-light">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <%if (form) {%>
+      <tfoot>
+        <tr>
+          <th>New</th>
+          <form method="POST" class="form">
+            <th><%- form.fields.name.toHTML() %></th>
+            <th><button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button></th>
+          </form>
+        </tr>
+        <%if (form.isValid) {%>
+        <tr>
+          <th></th>
+          <th><%- form.fields.name.errorHTML() || '' %></th>
+          <th></th>
+        </tr>
+        <%}%>
+      </tfoot>
+    <%}%>
+    <tbody>
+      <% divisions.forEach(function(division){ %>
+        <tr>
+          <td><a href="division/<%= division.id %>/read"><%= division.id %></td>
+          <td><%= division.name %></td>
+          <td>
+            <%if (rolePerms.find(obj => obj.name === 'panel_division' && obj.RolePermission.perm.includes('u'))) {%>
+              <a href="division/<%= division.id %>/update">Edit</a>
+            <%}%>
+            <%if (rolePerms.find(obj => obj.name === 'panel_division' && obj.RolePermission.perm.includes('d'))) {%>
+              <a href="division/<%= division.id %>/delete">Delete</a>
+            <%}%>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

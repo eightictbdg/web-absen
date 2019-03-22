@@ -1,0 +1,36 @@
+<h1 class="merah">Configuration</h1>
+<div class="bar"></div>
+<br>
+<div class="tablecontainer border bg-light">
+  <table cellspacing="0" class="table bg-light">
+    <thead class="thead-light">
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (rolePerms.find(obj => obj.name === 'panel_config' && obj.RolePermission.perm.includes('u'))) {%>
+        <form method="POST" class="form">
+          <% Object.keys(form.fields).forEach(function(field){ %>
+            <tr>
+              <td><%- form.fields[field].labelHTML() %></td>
+              <td><%- form.fields[field].toHTML() %></td>
+            </tr>
+          <% }); %>
+          <tr>
+            <td></td>
+            <td><button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submit</button></td>
+          </tr>
+        </form>
+      <%} else {%>
+        <tr>
+          <td><%- form.fields.default_role.labelText() %></td>
+          <td>
+            <%- (form.fields.default_role.choices.filter(role => role[0] == form.fields.default_role.value))[0][1] %>
+          </td>
+        </tr>
+      <%}%>
+    </tbody>
+  </table>
+</div>

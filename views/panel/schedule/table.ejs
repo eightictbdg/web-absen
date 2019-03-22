@@ -1,0 +1,55 @@
+<h1 class="merah">Schedules</h1>
+<div class="bar"></div>
+<br>
+<div class="tablecontainer border bg-light">
+  <table cellspacing="0" class="table bg-light">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Info</th>
+        <th>Passkey</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <%if (form) {%>
+      <tfoot>
+        <tr>
+          <th>New</th>
+          <form method="POST" class="form">
+            <th><%- form.fields.date.toHTML() %></th>
+            <th><%- form.fields.info.toHTML() %></th>
+            <th><%- form.fields.passkey.toHTML() %></th>
+            <th><button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button></th>
+          </form>
+        </tr>
+        <%if (form.isValid) {%>
+          <tr>
+            <th></th>
+            <th><%- form.fields.date.errorHTML() || '' %></th>
+            <th><%- form.fields.info.errorHTML() || '' %></th>
+            <th><%- form.fields.passkey.errorHTML() || '' %></th>
+          </tr>
+        <%}%>
+      </tfoot>
+    <%}%>
+    <tbody>
+      <% schedules.forEach(function(schedule){ %>
+        <tr>
+          <td><a href="schedule/<%= schedule.id %>/read"><%= schedule.id %></td>
+          <td><%= schedule.date %></td>
+          <td><%= schedule.info %></td>
+          <td><%= schedule.passkey %></td>
+          <td>
+            <%if (rolePerms.find(obj => obj.name === 'panel_schedule' && obj.RolePermission.perm.includes('u'))) {%>
+              <a href="schedule/<%= schedule.id %>/update">Edit</a>
+            <%}%>
+            <%if (rolePerms.find(obj => obj.name === 'panel_schedule' && obj.RolePermission.perm.includes('d'))) {%>
+              <a href="schedule/<%= schedule.id %>/delete">Delete</a>
+            <%}%>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

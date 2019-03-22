@@ -1,0 +1,58 @@
+<div class="list-group text-sm-left">
+  <%if (rolePerms.find(obj => obj.name === 'panel_config' && obj.RolePermission.perm.includes('r'))) {%>
+    <a 
+      href="/panel/config" 
+      class="list-group-item list-group-item-action <%if (_currentUrl.startsWith('/panel/config')) {%>active<%}%>"
+    >
+    <i class="fa fa-cogs"></i> Configuration
+  <%}%>
+  </a>
+  <%if (rolePerms.find(obj => obj.name === 'panel_schedule' && obj.RolePermission.perm.includes('r'))) {%>
+    <a 
+      href="/panel/schedule" 
+      class="list-group-item list-group-item-action <%if (_currentUrl.startsWith('/panel/schedule')) {%>active<%}%>"
+    >
+      <i class="fa fa-calendar"></i> Schedule
+    </a>
+  <%}%>
+  <%if (rolePerms.find(obj => obj.name === 'panel_division' && obj.RolePermission.perm.includes('r'))) {%>
+    <a 
+      href="/panel/division" 
+      class="list-group-item list-group-item-action <%if (_currentUrl.startsWith('/panel/division')) {%>active<%}%>"
+    >
+      <i class="fa fa-users"></i> Division
+    </a>
+  <%}%>
+  <%if (rolePerms.find(obj => obj.name === 'panel_role' && obj.RolePermission.perm.includes('r'))) {%>
+    <a
+      href="/panel/role" 
+      class="list-group-item list-group-item-action <%if (_currentUrl.startsWith('/panel/role')) {%>active<%}%>"
+    >
+      <i class="fa fa-id-card"></i> Role
+    </a>
+  <%}%>
+  <%if (rolePerms.find(obj => obj.name === 'panel_user' && obj.RolePermission.perm.includes('r'))) {%>
+    <a 
+      href="/panel/user" 
+      class="list-group-item list-group-item-action <%if (_currentUrl.startsWith('/panel/user')) {%>active<%}%>"
+    >
+      <i class="fa fa-user"></i> User
+    </a>
+  <%}%>
+  <%if (rolePerms.find(obj => obj.name === 'panel_csv' && obj.RolePermission.perm.includes('r'))) {%>
+    <a
+      href="/panel/csv" 
+      class="list-group-item list-group-item-action <%if (_currentUrl.startsWith('/panel/csv')) {%>active<%}%>"
+    >
+      <i class="fas fa-file-csv"></i> Exports
+    </a>
+  <%}%>
+  <%if (rolePerms.find(obj => obj.name === 'panel_attend' && obj.RolePermission.perm.includes('c'))) {%>
+    <a
+      href="/panel/attend" 
+      class="list-group-item list-group-item-action <%if (_currentUrl.startsWith('/panel/attend')) {%>active<%}%>"
+    >
+      <i class="fas fa-file-csv"></i> Attend
+    </a>
+  <%}%>
+</div>

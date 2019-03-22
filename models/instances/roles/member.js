@@ -1,29 +1,21 @@
 const crypto = require('crypto');
 
-const name = 'Anggota';
+module.exports.name = 'Anggota';
 
-async function init(db) {
+module.exports.callback = async function(db) {
+  var Role = db.Role;
   var User = db.User;
-  var Role = db.Role;
+  var role = await Role.findOne({where: {name: module.exports.name}});
+  
+  var permission = require('../permissions');
 
-  var query_result = await Role.findOrCreate({where: {name: name}});
-  var role_not_exist = query_result[1];
-  var role = query_result[0];
+  var permAttend = await permission.Panel.Attend.init(db);
 
-  if (role_not_exist) {
-    ;
-  }
-
-  return role;
-}
-
-async function get(db){
-  var Role = db.Role;
-  role = await Role.findOne({where: {name: name}});
-  return role;
-}
-
-module.exports = {
-  init,
-  get
+  permAttend.RolePermission = {perm: 'c'};
+  
+  var permission_list = [
+    permAttend
+  ];
+  
+  await role.setPermissions(permission_list);
 }
