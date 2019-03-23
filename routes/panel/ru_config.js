@@ -47,10 +47,12 @@ function sub(router, db) {
   router.get(table_get_url, asyncHandler(async function config_table_get(req, res, next) {
     var form = config_form;
     var roles = await db.Role.findAll();
-    var default_role = (await db.Config.findOne({where: {name: 'default_role'}}));
-    config_form.fields.default_role.choices = [[0,'-']];
+    var default_role = await db.instances.configs.DefaultRole.get(db);
+    var cd_admin = await db.instances.configs.CDAdmin.get(db);
+    form.fields.default_role.choices = [[0,'-']];
     roles.forEach(function (role) {config_form.fields.default_role.choices.push([role.id,role.name])});
-    config_form.fields.default_role.value = default_role.value;
+    form.fields.default_role.value = default_role.value;
+    form.fields.cd_admin.value = cd_admin.value;
     res.render('boilerplate_panel', {_template: 'panel/config/table', form: form});
   }));
 
@@ -59,9 +61,12 @@ function sub(router, db) {
     config_form.handle(req, {
       success: async function (form) {
         if (await db.Role.findByPk(form.data.default_role)) {
-          var default_role = (await db.Config.findOne({where: {name: 'default_role'}}));
+          var default_role = await db.instances.configs.DefaultRole.get(db);
+          var cd_admin = await db.instances.configs.CDAdmin.get(db);
           default_role.value = form.data.default_role;
           default_role.save();
+          cd_admin.value = form.data.cd_admin;
+          cd_admin.save()
           req.flash('info','Success!');
           req.session.save(function() {
             res.redirect(table_get_url);
@@ -76,10 +81,12 @@ function sub(router, db) {
       },
       other: async function (form) {
         var roles = await db.Role.findAll();
-        var default_role = (await db.Config.findOne({where: {name: 'default_role'}}));
-        config_form.fields.default_role.choices = [[0,'-']];
+        var default_role = await db.instances.configs.DefaultRole.get(db);
+        var cd_admin = await db.instances.configs.CDAdmin.get(db);
+        form.fields.default_role.choices = [[0,'-']];
         roles.forEach(function (role) {config_form.fields.default_role.choices.push([role.id,role.name])});
-        config_form.fields.default_role.value = default_role.value;
+        form.fields.default_role.value = default_role.value;
+        form.fields.cd_admin.value = cd_admin.value;
         res.render('boilerplate_panel', {_template: 'panel/config/table', form: form});
       }
     });

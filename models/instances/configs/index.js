@@ -1,7 +1,9 @@
 var DefaultRole = require('./default_role');
+var CDAdmin = require('./cd_admin');
 
 var instances = {
-  DefaultRole
+  DefaultRole,
+  CDAdmin
 };
 
 for (var key in instances) {
@@ -25,9 +27,9 @@ for (var key in instances) {
 
   instance.get = async function(db) {
     var Config = db.Config;
-    var config = await Role.findOne({where: {name: this.name}});
+    var config = await Config.findOne({where: {name: this.name}});
     return config;
-}
+  }
 }
 
 module.exports = instances;

@@ -85,18 +85,29 @@ function sub(router, db) {
       success: async function (form) {
         if (!(await db.User.findOne({where: {username: form.data.username}}))) {
           if (await db.Role.findByPk(form.data.role)) {
-            var user = await db.User.create({
-              name: form.data.name,
-              username: form.data.username,
-              class: form.data.class,
-              divisionId: await db.Division.findByPk(form.data.division) ? form.data.division : null,
-              roleId: form.data.role,
-              password: crypto.createHash('sha512').update(form.data.password).digest('hex')
-            });
-            req.flash('info', 'Success!');
-            req.session.save(function() {
-              res.redirect(table_get_url);
-            });
+            if (
+              form.data.role == (await db.instances.roles.Admin.get(db)).id && 
+              (await db.instances.configs.CDAdmin.get(db)).value == 1)
+            {
+              var user = await db.User.create({
+                name: form.data.name,
+                username: form.data.username,
+                class: form.data.class,
+                divisionId: await db.Division.findByPk(form.data.division) ? form.data.division : null,
+                roleId: form.data.role,
+                password: crypto.createHash('sha512').update(form.data.password).digest('hex')
+              });
+              req.flash('info', 'Success!');
+              req.session.save(function() {
+                res.redirect(table_get_url);
+              });
+            }
+            else {
+              req.flash('error', 'Cannot create an Administrator!');
+              req.session.save(function() {
+                res.redirect(table_get_url);
+              });
+            }
           }
           else {
             req.flash('error', 'Invalid Role!');

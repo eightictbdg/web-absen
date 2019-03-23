@@ -24,12 +24,12 @@
           </tr>
         </form>
       <%} else {%>
-        <tr>
-          <td><%- form.fields.default_role.labelText() %></td>
-          <td>
-            <%- (form.fields.default_role.choices.filter(role => role[0] == form.fields.default_role.value))[0][1] %>
-          </td>
-        </tr>
+        <% Object.keys(form.fields).forEach(function(field){ %>
+          <tr>
+            <td><%- form.fields[field].labelText() %></td>
+            <td><%- form.fields[field].value %></td>
+          </tr>
+        <% }); %>
       <%}%>
     </tbody>
   </table>

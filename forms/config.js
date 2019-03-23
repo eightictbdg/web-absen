@@ -11,7 +11,16 @@ var login_form = forms.create({
         classes: ['form-control','form-control-sm','dropdown']
       }
     ),
-    label: 'Default Role'
+    label: 'Default Role ID for new user'
+  }),
+  cd_admin: fields.string({
+    inputOnly: true,
+    widget: widgets.checkbox(
+      {
+        classes: ['form-control','form-control-sm']
+      }
+    ),
+    label: 'Create/Delete Administrator'
   })
 });
 
