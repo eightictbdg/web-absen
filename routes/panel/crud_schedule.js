@@ -1,14 +1,17 @@
 const express = require('express');
-const asyncHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler');
+const Sequelize = require('sequelize');
 
 const table_get_url = '/panel/schedule';
 const create_post_url = '/panel/schedule';
 const read_get_url = '/panel/schedule/:scheduleId/read';
+const read_csv_get_url = '/panel/schedule/:scheduleId/read/users.csv';
 const update_get_url = '/panel/schedule/:scheduleId/update';
 const update_post_url = '/panel/schedule/:scheduleId/update';
 const delete_get_url = '/panel/schedule/:scheduleId/delete';
 
 const read_get_url_regex = '^\/panel\/schedule\/[0-9]*\/read$';
+const read_csv_get_url_regex = '^\/panel\/schedule\/[0-9]*\/read/users.csv$';
 const update_get_url_regex = '^\/panel\/schedule\/[0-9]*\/update$';
 const update_post_url_regex = '^\/panel\/schedule\/[0-9]*\/update$';
 const delete_get_url_regex = '^\/panel\/schedule\/[0-9]*\/delete$';
@@ -37,7 +40,12 @@ function sub(router, db) {
   router.use('/panel/schedule', function IsAuthorizedMiddleware(req, res, next) {
     var perm = res.locals.rolePerms.find(obj => obj.name === permission.name);
     if (perm) {
-      if ((req.originalUrl === table_get_url || RegExp(read_get_url_regex).test(req.originalUrl)) && req.method === 'GET') {
+      if (
+        (
+          req.originalUrl === table_get_url ||
+          RegExp(read_get_url_regex).test(req.originalUrl) ||
+          RegExp(read_csv_get_url_regex).test(req.originalUrl)
+        ) && req.method === 'GET') {
         if (perm.RolePermission.perm.includes('r')) next();
         else notAuthorized(req, res, next);
       }
@@ -114,6 +122,37 @@ function sub(router, db) {
         schedule: schedule,
         users: users
       });
+    }
+    else res.sendStatus(404);
+  }));
+
+  router.get(read_csv_get_url, asyncHandler(async function read_schedule_csv_get(req, res, next) {
+    var schedule = await db.Schedule.findByPk(req.params.scheduleId);
+    if (schedule) {
+      var users = await schedule.getUsers({
+        include: [{
+          model: db.Division,
+          as: 'division',
+          attributes: []
+        }, {
+          model: db.Role,
+          as: 'role',
+          attributes: []
+        }],
+        attributes: [
+          ['id','ID'],
+          ['name','Nama'],
+          ['class','Kelas'],
+          ['username', 'Username'],
+          [Sequelize.col('division.name'), 'Nama Divisi'],
+          [Sequelize.col('role.name'), 'Peran'],
+          [Sequelize.col('UserSchedule.createdAt'), 'Absen Pada Waktu [UTC]']
+        ],
+        joinTableAttributes: [],
+        raw: true
+      });
+      var rows = JSON.parse(JSON.stringify(users));
+      res.csv(rows, true);
     }
     else res.sendStatus(404);
   }));

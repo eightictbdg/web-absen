@@ -30,7 +30,7 @@ function sub(router, db) {
   router.get(create_get_url, asyncHandler(async function attend_get(req, res, next) {
     var date = datetime.create();
     var formatted = date.format('Y-m-d');
-    var schedules = await db.Schedule.findAll({ where: { date: formatted } });
+    var schedules = await db.Schedule.findAll({where: {date: formatted}});
     if (schedules.length !== 0) {
       var user = await db.User.findByPk(req.session.user_id);
       user.schedules = await user.hasSchedules();
