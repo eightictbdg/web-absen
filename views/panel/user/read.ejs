@@ -14,7 +14,8 @@
   <a href="/panel/role/<%= user.role.id %>/read"><%= user.role.name %></a>
 <%}%>
 </li>
-<li class="list-group-item">Password Hash: <br> <code><%= user.password %></code></li>
+<li class="list-group-item">Password Hash:
+  <p style="overflow-x: scroll;"><code><%= user.password %></code></p></li>
 </ul>
 <br>
 <%if (rolePerms.find(obj => obj.name === 'panel_user' && obj.RolePermission.perm.includes('u'))) {%>

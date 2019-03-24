@@ -14,11 +14,13 @@
       <% }) %>
     </div>
   </li>
-  <li class="list-group-item"><a href="read/users.csv">CSV</a></li>
 </ul>
 <br>
 <%if (rolePerms.find(obj => obj.name === 'panel_schedule' && obj.RolePermission.perm.includes('u'))) {%>
   <a href="update"><button class="btn btn-success"><i class="fa fa-pencil-alt"></i> Edit</button></a>
+<%}%>
+<%if (rolePerms.find(obj => obj.name === 'panel_schedule' && obj.RolePermission.perm.includes('r'))) {%>
+  <a href="read/users.csv" class="btn btn-primary"><i class="fas fa-file-download"></i> Get CSV</a>
 <%}%>
 <%if (rolePerms.find(obj => obj.name === 'panel_schedule' && obj.RolePermission.perm.includes('d'))) {%>
   <a href="delete"><button class="btn btn-danger"><i class="fa fa-trash-alt"></i> Delete</button></a>
