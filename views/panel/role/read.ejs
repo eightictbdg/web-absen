@@ -17,7 +17,7 @@
     <li class="list-group-item">Permissions: <br>
       <ul class="list-group">
         <% role.permissions.forEach(function(permission){ %>
-          <li><%= permission.name %> : <%= permission.RolePermission.perm %></li>
+          <li class="list-group-item list-group-item-secondary"><%= permission.name %> : <%= permission.RolePermission.perm %></li>
         <%})%>
       </ul>
     </li>
