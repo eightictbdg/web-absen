@@ -85,9 +85,9 @@ function sub(router, db) {
       success: async function (form) {
         if (!(await db.User.findOne({where: {username: form.data.username}}))) {
           if (await db.Role.findByPk(form.data.role)) {
-            if (
-              form.data.role == (await db.instances.roles.Admin.get(db)).id && 
-              (await db.instances.configs.CDAdmin.get(db)).value == 1)
+            if (form.data.role != (await db.instances.roles.Admin.get(db)).id ||
+                (form.data.role == (await db.instances.roles.Admin.get(db)).id && 
+                (await db.instances.configs.CDAdmin.get(db)).value == 1))
             {
               var user = await db.User.create({
                 name: form.data.name,
@@ -182,23 +182,35 @@ function sub(router, db) {
         if (user) {
           if (user.name == form.data.name || !(await db.User.findOne({where: {username: form.data.username}}))) {
             if (await db.Role.findByPk(form.data.role)) {
-              user.name = form.data.name;
-              user.username = form.data.username;
-              user.class = form.data.class;
-              user.divisionId = await db.Division.findByPk(form.data.division) ? form.data.division : null,
-              user.roleId = form.data.role;
-              user.password = form.data.password ? crypto.createHash('sha512').update(form.data.password).digest('hex') : user.password;
-              user.save();
-              req.flash('info','Success!');
-              req.session.save(function() {
-                res.redirect(table_get_url);
-              });
+              if (form.data.role == (await user.getRole()).id ||
+                form.data.role != (await db.instances.roles.Admin.get(db)).id ||
+                  (form.data.role == (await db.instances.roles.Admin.get(db)).id && 
+                  (await db.instances.configs.CDAdmin.get(db)).value == 1))
+              {
+                user.name = form.data.name;
+                user.username = form.data.username;
+                user.class = form.data.class;
+                user.divisionId = await db.Division.findByPk(form.data.division) ? form.data.division : null,
+                user.roleId = form.data.role;
+                user.password = form.data.password ? crypto.createHash('sha512').update(form.data.password).digest('hex') : user.password;
+                await user.save();
+                req.flash('info','Success!');
+                req.session.save(function() {
+                  res.redirect(table_get_url);
+                });
+              }
+              else {
+                req.flash('error', 'Cannot create an Administrator!');
+                req.session.save(function() {
+                  res.redirect(req.url);
+                });
+              }
             }
             else {
               req.flash('error', 'Invalid Role!');
               req.session.save(function() {
                 res.redirect(req.url);
-              })
+              });
             }
           }
           else {
@@ -237,9 +249,22 @@ function sub(router, db) {
   router.get(delete_get_url, asyncHandler(async function delete_user_get(req, res, next) {
     var user = await db.User.findByPk(req.params.userId);
     if (user) {
-      await user.destroy();
-      req.flash('info','Success!')
-      res.redirect(table_get_url)
+      if ((await user.getRole()).id != (await db.instances.roles.Admin.get(db)).id || (
+            (await user.getRole()).id == (await db.instances.roles.Admin.get(db)).id && 
+            (await db.instances.configs.CDAdmin.get(db)).value == 1)
+        ) {
+        await user.destroy();
+        req.flash('info','Success!');
+        req.session.save(function() {
+          res.redirect(table_get_url);
+        });
+      }
+      else {
+        req.flash('error', 'Cannot delete an Administrator!');
+        req.session.save(function() {
+          res.redirect(table_get_url);
+        });
+      }
     }
     else res.sendStatus(404);
   }));

@@ -52,7 +52,7 @@ function sub(router, db) {
     form.fields.default_role.choices = [[0,'-']];
     roles.forEach(function (role) {config_form.fields.default_role.choices.push([role.id,role.name])});
     form.fields.default_role.value = default_role.value;
-    form.fields.cd_admin.value = cd_admin.value;
+    form.fields.cd_admin.value = cd_admin.value == 1 ? 'on' : '';
     res.render('boilerplate_panel', {_template: 'panel/config/table', form: form});
   }));
 
@@ -65,8 +65,8 @@ function sub(router, db) {
           var cd_admin = await db.instances.configs.CDAdmin.get(db);
           default_role.value = form.data.default_role;
           default_role.save();
-          cd_admin.value = form.data.cd_admin;
-          cd_admin.save()
+          cd_admin.value = form.data.cd_admin == 'on' ? 1 : 0;
+          await cd_admin.save()
           req.flash('info','Success!');
           req.session.save(function() {
             res.redirect(table_get_url);

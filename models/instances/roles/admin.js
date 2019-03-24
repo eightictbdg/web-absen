@@ -17,7 +17,7 @@ module.exports.callback = async function(db) {
   var permPermission = await permission.Panel.Permission.init(db);
   var permCSV = await permission.Panel.CSV.init(db);
 
-  permRole.RolePermission = {perm: 'crud'};
+  permRole.RolePermission = {perm: 'r'};
   permDivision.RolePermission = {perm: 'crud'};
   permUser.RolePermission = {perm: 'crud'};
   permSchedule.RolePermission = {perm: 'crud'};
